@@ -1,0 +1,254 @@
+[gd_scene load_steps=15 format=3 uid="uid://cdb8ascv60w6m"]
+
+[ext_resource type="SpriteFrames" uid="uid://cek45u8lpr1um" path="res://Assets/Player/PlayerAnimation.tres" id="1_0m1k7"]
+[ext_resource type="PhysicsMaterial" uid="uid://bwit6m5lwgh5d" path="res://Assets/Player/PlayerRagdollPhysics.tres" id="1_2gtoc"]
+[ext_resource type="Script" path="res://Assets/Player/Player.cs" id="1_6hho7"]
+[ext_resource type="PhysicsMaterial" uid="uid://c58a8xbvj0w0y" path="res://Assets/Player/PlayerControlledPhysics.tres" id="1_f8gyt"]
+[ext_resource type="FontFile" uid="uid://jvioeod3wvrd" path="res://Fonts/GravityRegular5.ttf" id="5_562yd"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_5p7l5"]
+radius = 4.0
+height = 16.0
+
+[sub_resource type="Animation" id="Animation_hd3pe"]
+resource_name = "idle"
+step = 1.0
+tracks/0/type = "method"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimatedSprite2D")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [&"idle", 1.0, false],
+"method": &"play"
+}]
+}
+
+[sub_resource type="Animation" id="Animation_qnlhk"]
+resource_name = "jump"
+step = 0.125
+tracks/0/type = "method"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0.25),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"Jump"
+}]
+}
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AnimatedSprite2D")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [&"jump_squat", 1.0, false],
+"method": &"play"
+}]
+}
+
+[sub_resource type="Animation" id="Animation_xoc5b"]
+resource_name = "run"
+length = 1.00001
+tracks/0/type = "method"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimatedSprite2D")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(1, 1),
+"values": [{
+"args": [&"walk", 1.0, false],
+"method": &"play"
+}, {
+"args": [&"run", 1.0, false],
+"method": &"play"
+}]
+}
+
+[sub_resource type="Animation" id="Animation_3dedj"]
+resource_name = "walk"
+step = 1.0
+tracks/0/type = "method"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimatedSprite2D")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [&"walk", 1.0, false],
+"method": &"play"
+}]
+}
+
+[sub_resource type="Animation" id="Animation_pev06"]
+resource_name = "fall"
+step = 1.0
+tracks/0/type = "method"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimatedSprite2D")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [&"fall", 1.0, false],
+"method": &"play"
+}]
+}
+
+[sub_resource type="Animation" id="Animation_gw1oy"]
+resource_name = "land"
+length = 0.500017
+step = 0.142857
+tracks/0/type = "method"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0.5),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"Idle"
+}]
+}
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AnimatedSprite2D")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [&"land", 1.0, false],
+"method": &"play"
+}]
+}
+
+[sub_resource type="Animation" id="Animation_5rjem"]
+resource_name = "splat"
+length = 1.60002
+step = 0.2
+tracks/0/type = "method"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(1.6),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"Idle"
+}]
+}
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AnimatedSprite2D")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [&"splat", 1.0, false],
+"method": &"play"
+}]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_112fm"]
+_data = {
+"fall": SubResource("Animation_pev06"),
+"idle": SubResource("Animation_hd3pe"),
+"jump": SubResource("Animation_qnlhk"),
+"land": SubResource("Animation_gw1oy"),
+"run": SubResource("Animation_xoc5b"),
+"splat": SubResource("Animation_5rjem"),
+"walk": SubResource("Animation_3dedj")
+}
+
+[node name="Player" type="RigidBody2D" node_paths=PackedStringArray("Sprite", "Animation", "DistanceFallen", "GroundRayCast", "RightRayCast", "LeftRayCast")]
+physics_material_override = ExtResource("1_f8gyt")
+lock_rotation = true
+continuous_cd = 1
+script = ExtResource("1_6hho7")
+Sprite = NodePath("AnimatedSprite2D")
+Animation = NodePath("AnimationPlayer")
+DistanceFallen = NodePath("DistanceFallen")
+GroundRayCast = NodePath("GroundCheck")
+RightRayCast = NodePath("RightWallCheck")
+LeftRayCast = NodePath("LeftWallCheck2")
+ControlledPhysics = ExtResource("1_f8gyt")
+RagdollPhysics = ExtResource("1_2gtoc")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = ExtResource("1_0m1k7")
+animation = &"splat"
+autoplay = "idle"
+frame = 6
+frame_progress = 1.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 4)
+shape = SubResource("CapsuleShape2D_5p7l5")
+
+[node name="RightWallCheck" type="RayCast2D" parent="."]
+position = Vector2(0, 4)
+target_position = Vector2(8, 0)
+
+[node name="LeftWallCheck2" type="RayCast2D" parent="."]
+position = Vector2(0, 4)
+target_position = Vector2(-8, 0)
+
+[node name="GroundCheck" type="RayCast2D" parent="."]
+position = Vector2(0, 11)
+target_position = Vector2(0, 5)
+
+[node name="Camera2D" type="Camera2D" parent="."]
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_112fm")
+}
+
+[node name="DistanceFallen" type="Label" parent="."]
+visible = false
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -8.0
+offset_top = -10.0
+offset_right = 8.0
+offset_bottom = -5.0
+grow_horizontal = 2
+theme_override_fonts/font = ExtResource("5_562yd")
+theme_override_font_sizes/font_size = 5
+text = "0m"
+horizontal_alignment = 1
