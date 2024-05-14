@@ -10,6 +10,24 @@
 radius = 4.0
 height = 16.0
 
+[sub_resource type="Animation" id="Animation_pev06"]
+resource_name = "fall"
+step = 1.0
+tracks/0/type = "method"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimatedSprite2D")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [&"fall", 1.0, false],
+"method": &"play"
+}]
+}
+
 [sub_resource type="Animation" id="Animation_hd3pe"]
 resource_name = "idle"
 step = 1.0
@@ -60,67 +78,9 @@ tracks/1/keys = {
 }]
 }
 
-[sub_resource type="Animation" id="Animation_xoc5b"]
-resource_name = "run"
-length = 1.00001
-tracks/0/type = "method"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("AnimatedSprite2D")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.3),
-"transitions": PackedFloat32Array(1, 1),
-"values": [{
-"args": [&"walk", 1.0, false],
-"method": &"play"
-}, {
-"args": [&"run", 1.0, false],
-"method": &"play"
-}]
-}
-
-[sub_resource type="Animation" id="Animation_3dedj"]
-resource_name = "walk"
-step = 1.0
-tracks/0/type = "method"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("AnimatedSprite2D")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"values": [{
-"args": [&"walk", 1.0, false],
-"method": &"play"
-}]
-}
-
-[sub_resource type="Animation" id="Animation_pev06"]
-resource_name = "fall"
-step = 1.0
-tracks/0/type = "method"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("AnimatedSprite2D")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"values": [{
-"args": [&"fall", 1.0, false],
-"method": &"play"
-}]
-}
-
 [sub_resource type="Animation" id="Animation_gw1oy"]
 resource_name = "land"
-length = 0.500017
-step = 0.142857
+length = 0.30001
 tracks/0/type = "method"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -128,7 +88,7 @@ tracks/0/path = NodePath(".")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0.5),
+"times": PackedFloat32Array(0.3),
 "transitions": PackedFloat32Array(1),
 "values": [{
 "args": [],
@@ -146,6 +106,27 @@ tracks/1/keys = {
 "transitions": PackedFloat32Array(1),
 "values": [{
 "args": [&"land", 1.0, false],
+"method": &"play"
+}]
+}
+
+[sub_resource type="Animation" id="Animation_xoc5b"]
+resource_name = "run"
+length = 1.00001
+tracks/0/type = "method"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimatedSprite2D")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(1, 1),
+"values": [{
+"args": [&"walk", 1.0, false],
+"method": &"play"
+}, {
+"args": [&"run", 1.0, false],
 "method": &"play"
 }]
 }
@@ -183,6 +164,24 @@ tracks/1/keys = {
 }]
 }
 
+[sub_resource type="Animation" id="Animation_3dedj"]
+resource_name = "walk"
+step = 1.0
+tracks/0/type = "method"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimatedSprite2D")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [&"walk", 1.0, false],
+"method": &"play"
+}]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_112fm"]
 _data = {
 "fall": SubResource("Animation_pev06"),
@@ -210,9 +209,9 @@ RagdollPhysics = ExtResource("1_2gtoc")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = ExtResource("1_0m1k7")
-animation = &"splat"
+animation = &"land"
 autoplay = "idle"
-frame = 6
+frame = 2
 frame_progress = 1.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
@@ -220,11 +219,11 @@ position = Vector2(0, 4)
 shape = SubResource("CapsuleShape2D_5p7l5")
 
 [node name="RightWallCheck" type="RayCast2D" parent="."]
-position = Vector2(0, 4)
+position = Vector2(0, 12)
 target_position = Vector2(8, 0)
 
 [node name="LeftWallCheck2" type="RayCast2D" parent="."]
-position = Vector2(0, 4)
+position = Vector2(0, 12)
 target_position = Vector2(-8, 0)
 
 [node name="GroundCheck" type="RayCast2D" parent="."]
@@ -232,6 +231,9 @@ position = Vector2(0, 11)
 target_position = Vector2(0, 5)
 
 [node name="Camera2D" type="Camera2D" parent="."]
+limit_left = 0
+limit_right = 1024
+limit_bottom = 0
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {

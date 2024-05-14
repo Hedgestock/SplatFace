@@ -4,6 +4,9 @@ using System.Collections.Generic;
 
 public partial class Player : RigidBody2D
 {
+    [Signal]
+    public delegate void ScoreEventHandler();
+
     [Export]
     int Speed = 200;
 
@@ -76,7 +79,9 @@ public partial class Player : RigidBody2D
                 FallingHeight = Position.Y;
                 Animation.Play("fall");
             }
-            else if (Animation.AssignedAnimation == "fall" && GroundRayCast.IsColliding())
+            else if (Animation.AssignedAnimation == "fall"
+                && GroundRayCast.IsColliding()
+                && !(LeftRayCast.IsColliding() || RightRayCast.IsColliding()))
             {
                 Land();
             }
@@ -116,12 +121,12 @@ public partial class Player : RigidBody2D
         {
             DistanceFallen.Show();
             DistanceFallen.Text = $"{distanceFallen:0.00} m";
+            EmitSignal(SignalName.Score, distanceFallen);
             Animation.Play("splat");
         }
         else
         {
             Animation.Play("land");
-
         }
 
         LinearVelocity = Vector2.Zero;
