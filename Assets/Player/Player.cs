@@ -64,7 +64,7 @@ public partial class Player : RigidBody2D
         }
         else
         {
-            GroundRayCast.TargetPosition = new Vector2(0, (float) Mathf.Max(LinearVelocity.Y * delta, 5));
+            GroundRayCast.TargetPosition = new Vector2(0, (float) Mathf.Max(LinearVelocity.Y * 2 * delta, 5));
             if (Animation.AssignedAnimation == "jump" && LinearVelocity.Y >= 0)
             {
                 FallingHeight = Position.Y;
@@ -76,13 +76,10 @@ public partial class Player : RigidBody2D
             }
         }
 
-        if (ShouldRagdoll)
-        {
-            PhysicsMaterialOverride = RagdollPhysics;
-        }
-        else PhysicsMaterialOverride = ControlledPhysics;
+        if (ShouldRagdoll) { PhysicsMaterialOverride = RagdollPhysics; }
+        else { PhysicsMaterialOverride = ControlledPhysics; }
 
-        DebugLabel.Text = $"{Sprite.Animation}\ngrounded: {GroundRayCast.IsColliding()}\nactionable: {IsActionable}\n{LinearVelocity.Y:0.0}";
+        DebugLabel.Text = $"{Sprite.Animation}\ngrounded: {GroundRayCast.IsColliding()}\nactionable: {IsActionable}\n{LinearVelocity.Y * delta:0.0}";
     }
 
     public override void _IntegrateForces(PhysicsDirectBodyState2D state)
@@ -132,16 +129,14 @@ public partial class Player : RigidBody2D
         {
             Animation.Play("land");
         }
-
-        LinearVelocity = Vector2.Zero;
     }
 
     void Idle()
     {
-        if (GroundRayCast.IsColliding())
-        {
-            Animation.Play("idle");
-        }
+        //if (GroundRayCast.IsColliding())
+        //{
+        Animation.Play("idle");
+        //}
     }
 
     bool IsActionable
@@ -157,7 +152,7 @@ public partial class Player : RigidBody2D
     {
         get
         {
-            return !GroundRayCast.IsColliding() && new List<string>() { "jump", "fall" }.Contains(Sprite.Animation);
+            return !GroundRayCast.IsColliding(); //&& new List<string>() { "jump", "fall" }.Contains(Sprite.Animation);
         }
     }
 }

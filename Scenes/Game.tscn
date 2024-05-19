@@ -316,6 +316,6 @@ underline = 1
 uri = "https://penzilla.itch.io/protagonist-character"
 
 [node name="Player" parent="." instance=ExtResource("3_w2er8")]
-position = Vector2(247, -39)
+position = Vector2(369, -415)
 
 [connection signal="Score" from="Player" to="." method="HandleScore"]
