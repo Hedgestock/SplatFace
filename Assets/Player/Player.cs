@@ -42,20 +42,20 @@ public partial class Player : RigidBody2D
     public override void _PhysicsProcess(double delta)
     {
         base._PhysicsProcess(delta);
-        float direction = Input.GetAxis("move_left", "move_right");
-
-        if (Input.IsActionPressed("walk") || Sprite.Animation == "walk")
-            direction /= 2.1f;
-
         if (IsActionable)
         {
+            float direction = Input.GetAxis("move_left", "move_right");
+
+            if (IsWalking)
+                direction = (float) Mathf.Clamp(direction, -0.49, 0.49);
+
             LinearVelocity = new Vector2((float)(direction * Speed), LinearVelocity.Y);
             if (Animation.AssignedAnimation != "jump")
             {
                 if (direction == 0) Animation.Play("idle");
                 else
                 {
-                    if (Input.IsActionPressed("walk")) Animation.Play("walk");
+                    if (Mathf.Abs(direction) < 0.5 && (Animation.AssignedAnimation != "run")) Animation.Play("walk");
                     else if (Animation.AssignedAnimation != "run") Animation.Play("run");
 
                     Sprite.FlipH = direction < 0;
@@ -79,7 +79,7 @@ public partial class Player : RigidBody2D
         if (ShouldRagdoll) { PhysicsMaterialOverride = RagdollPhysics; }
         else { PhysicsMaterialOverride = ControlledPhysics; }
 
-        DebugLabel.Text = $"{Sprite.Animation}\ngrounded: {GroundRayCast.IsColliding()}\nactionable: {IsActionable}\n{LinearVelocity.Y * delta:0.0}";
+        DebugLabel.Text = $"{Animation.AssignedAnimation} - {Sprite.Animation}\ngrounded: {GroundRayCast.IsColliding()}\nactionable: {IsActionable}\n{LinearVelocity.Y * delta:0.0}";
     }
 
     public override void _IntegrateForces(PhysicsDirectBodyState2D state)
@@ -101,11 +101,16 @@ public partial class Player : RigidBody2D
 
     void JumpSquat()
     {
-        if (IsActionable) Animation.Play("jump");
+        if (IsActionable)
+        {
+            if (IsWalking) _lockWalkState = true;
+            Animation.Play("jump");
+        }
     }
 
     void Jump()
     {
+        _lockWalkState = false;
         if (GroundRayCast.IsColliding())
         {
             Sprite.Play("jump");
@@ -145,6 +150,16 @@ public partial class Player : RigidBody2D
         {
             return GroundRayCast.IsColliding()
                 && !new List<string>() { "jump", "fall", "land", "splat" }.Contains(Sprite.Animation);
+        }
+    }
+
+    private bool _lockWalkState = false;
+
+    bool IsWalking
+    {
+        get
+        {
+            return Input.IsActionPressed("walk") || Sprite.Animation == "walk" || _lockWalkState;
         }
     }
 
