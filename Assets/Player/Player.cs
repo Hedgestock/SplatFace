@@ -1,6 +1,7 @@
 using Godot;
 using System;
 using System.Collections.Generic;
+using static Godot.WebSocketPeer;
 
 public partial class Player : RigidBody2D
 {
@@ -11,41 +12,30 @@ public partial class Player : RigidBody2D
     int Speed = 200;
 
     [Export]
-    AnimatedSprite2D Sprite;
+    Label DistanceFallen;
 
+    [ExportGroup("Animation")]
+    [Export]
+    AnimatedSprite2D Sprite;
     [Export]
     AnimationPlayer Animation;
 
-    [Export]
-    Label DistanceFallen;
-
+    [ExportGroup("Physics")]
     [Export]
     RayCast2D GroundRayCast;
-
     [Export]
     RayCast2D RightRayCast;
-
     [Export]
     RayCast2D LeftRayCast;
 
     [Export]
     PhysicsMaterial ControlledPhysics;
-
     [Export]
     PhysicsMaterial RagdollPhysics;
 
-    enum Is
-    {
-        Idle,
-        Sitting,
-        Jumping,
-        Falling,
-        Walking,
-        Running,
-        Splatting
-    }
-
-    private Is State = Is.Idle;
+    [ExportGroup("Debug")]
+    [Export]
+    Label DebugLabel;
 
     private float FallingHeight = 0;
 
@@ -74,14 +64,13 @@ public partial class Player : RigidBody2D
         }
         else
         {
+            GroundRayCast.TargetPosition = new Vector2(0, (float) Mathf.Max(LinearVelocity.Y * delta, 5));
             if (Animation.AssignedAnimation == "jump" && LinearVelocity.Y >= 0)
             {
                 FallingHeight = Position.Y;
                 Animation.Play("fall");
             }
-            else if (Animation.AssignedAnimation == "fall"
-                && GroundRayCast.IsColliding()
-                && !(LeftRayCast.IsColliding() || RightRayCast.IsColliding()))
+            else if (Animation.AssignedAnimation == "fall" && GroundRayCast.IsColliding())
             {
                 Land();
             }
@@ -89,18 +78,33 @@ public partial class Player : RigidBody2D
 
         if (ShouldRagdoll)
         {
-            GD.Print("ragdolling");
             PhysicsMaterialOverride = RagdollPhysics;
         }
         else PhysicsMaterialOverride = ControlledPhysics;
+
+        DebugLabel.Text = $"{Sprite.Animation}\ngrounded: {GroundRayCast.IsColliding()}\nactionable: {IsActionable}\n{LinearVelocity.Y:0.0}";
+    }
+
+    public override void _IntegrateForces(PhysicsDirectBodyState2D state)
+    {
+        base._IntegrateForces(state);
     }
 
     public override void _Input(InputEvent @event)
     {
         if (@event.IsActionPressed("jump"))
         {
-            Animation.Play("jump");
+            JumpSquat();
         }
+        else if (@event.IsActionPressed("pause"))
+        {
+            GetTree().Paused = !GetTree().Paused;
+        }
+    }
+
+    void JumpSquat()
+    {
+        if (IsActionable) Animation.Play("jump");
     }
 
     void Jump()
@@ -153,8 +157,7 @@ public partial class Player : RigidBody2D
     {
         get
         {
-            return (LeftRayCast.IsColliding() || RightRayCast.IsColliding()) &&
-                new List<string>() { "jump", "fall" }.Contains(Sprite.Animation);
+            return !GroundRayCast.IsColliding() && new List<string>() { "jump", "fall" }.Contains(Sprite.Animation);
         }
     }
 }
