@@ -1,4 +1,4 @@
-[gd_scene load_steps=30 format=3 uid="uid://4vdsghonlo2d"]
+[gd_scene load_steps=39 format=3 uid="uid://4vdsghonlo2d"]
 
 [ext_resource type="TileSet" uid="uid://bkawqph4bvxg0" path="res://Assets/TileSets/BackgroundTileSet.tres" id="1_guc81"]
 [ext_resource type="Script" path="res://Scenes/Game.cs" id="1_x6a0h"]
@@ -7,6 +7,9 @@
 [ext_resource type="Theme" uid="uid://bem3ojr8yyndj" path="res://BillboardTheme.tres" id="3_frs74"]
 [ext_resource type="Texture2D" uid="uid://bcda4hjb3c7v4" path="res://Art/Background/Frontal Fog.png" id="3_krrpx"]
 [ext_resource type="PackedScene" uid="uid://cdb8ascv60w6m" path="res://Assets/Player/Player.tscn" id="3_w2er8"]
+[ext_resource type="Script" path="res://Scenes/ScoreLabel.cs" id="7_o4bgb"]
+[ext_resource type="Resource" uid="uid://dtvx5wogt0yb6" path="res://Assets/Score/Score.tres" id="8_sj54b"]
+[ext_resource type="FontFile" uid="uid://jvioeod3wvrd" path="res://Fonts/GravityRegular5.ttf" id="9_fuppl"]
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_h4eep"]
 
@@ -24,9 +27,6 @@ size = Vector2(32, 16)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_v7qqc"]
 size = Vector2(112, 32)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_fwc0w"]
-size = Vector2(32, 16)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_3dphu"]
 size = Vector2(160, 4)
@@ -73,9 +73,29 @@ size = Vector2(96, 4)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_aodtc"]
 size = Vector2(96, 16)
 
-[node name="Game" type="Node" node_paths=PackedStringArray("Score")]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_chk7x"]
+size = Vector2(192, 80)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_vdxsi"]
+size = Vector2(128, 48)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_jp1cu"]
+size = Vector2(48, 16)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_vxjdm"]
+size = Vector2(96, 4)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_x2kou"]
+size = Vector2(96, 4)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_hgxwn"]
+size = Vector2(128, 4)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ukxmv"]
+size = Vector2(64, 4)
+
+[node name="Game" type="Node"]
 script = ExtResource("1_x6a0h")
-Score = NodePath("Platform/Score")
 
 [node name="ParallaxBackground" type="ParallaxBackground" parent="."]
 visible = false
@@ -192,10 +212,6 @@ shape = SubResource("RectangleShape2D_3rs4c")
 position = Vector2(72, -368)
 shape = SubResource("RectangleShape2D_v7qqc")
 
-[node name="CollisionShape2D6" type="CollisionShape2D" parent="Platform/Ground"]
-position = Vector2(48, -392)
-shape = SubResource("RectangleShape2D_fwc0w")
-
 [node name="CollisionShape2D7" type="CollisionShape2D" parent="Platform/Ground"]
 position = Vector2(368, -302)
 shape = SubResource("RectangleShape2D_3dphu")
@@ -250,7 +266,7 @@ one_way_collision = true
 
 [node name="CollisionPolygon" type="CollisionPolygon2D" parent="Platform/Ground"]
 position = Vector2(207.033, -191.984)
-polygon = PackedVector2Array(-15.033, -16.016, 16.9671, -0.0164795, 16.967, 15.984, -15.033, 15.984)
+polygon = PackedVector2Array(-15.033, -16.016, 16.9671, -0.0164795, 16.967, 15.984, -15.033, 15.984, -15.033, -1.01601, -47.033, -16.016)
 
 [node name="CollisionPolygon2" type="CollisionPolygon2D" parent="Platform/Ground"]
 position = Vector2(255, -159)
@@ -258,11 +274,11 @@ polygon = PackedVector2Array(-14, -17, 1, -17, 16.9671, 14.9835, -14.0329, 14.98
 
 [node name="CollisionPolygon3" type="CollisionPolygon2D" parent="Platform/Ground"]
 position = Vector2(80, -380)
-polygon = PackedVector2Array(-16, -20, 16, -4, 16, 11, -16, 11)
+polygon = PackedVector2Array(-16, -20, 16, -4, -48, -4, -48, -20)
 
 [node name="CollisionPolygon4" type="CollisionPolygon2D" parent="Platform/Ground"]
 position = Vector2(859, -131)
-polygon = PackedVector2Array(-11, 3, 21, -13, 21, 20, -11, 20)
+polygon = PackedVector2Array(-11, 3, 21, -13, 53, -13, 21, 3, 21, 20, -11, 20)
 
 [node name="CollisionPolygon5" type="CollisionPolygon2D" parent="Platform/Ground"]
 position = Vector2(939, -355)
@@ -335,17 +351,6 @@ text = "jotson"
 underline = 1
 uri = "https://anokolisa.itch.io/sidescroller-shooter-central-city"
 
-[node name="Score" type="Label" parent="Platform"]
-z_index = -1
-z_as_relative = false
-offset_left = 626.0
-offset_top = -308.0
-offset_right = 686.0
-offset_bottom = -300.0
-theme = ExtResource("3_frs74")
-text = "0 m"
-horizontal_alignment = 1
-
 [node name="HedgestockCredits" type="Label" parent="Platform"]
 z_index = -1
 z_as_relative = false
@@ -390,40 +395,375 @@ text = "Penzilla"
 underline = 1
 uri = "https://penzilla.itch.io/protagonist-character"
 
-[node name="Player" parent="." instance=ExtResource("3_w2er8")]
-position = Vector2(151, -892)
+[node name="Score" type="Label" parent="Platform"]
+z_index = -1
+z_as_relative = false
+offset_left = 626.0
+offset_top = -308.0
+offset_right = 686.0
+offset_bottom = -300.0
+theme = ExtResource("3_frs74")
+text = "0 m"
+horizontal_alignment = 1
+script = ExtResource("7_o4bgb")
+Score = ExtResource("8_sj54b")
 
-[node name="Level" type="Node2D" parent="."]
+[node name="Advertical" type="Node2D" parent="Platform"]
+position = Vector2(114, -334)
+
+[node name="Safall" type="Node2D" parent="Platform/Advertical"]
+position = Vector2(15, 4)
+
+[node name="Label" type="Label" parent="Platform/Advertical/Safall"]
+z_index = -1
+z_as_relative = false
+offset_right = 7.0
+offset_bottom = 8.0
+theme = ExtResource("3_frs74")
+text = "S"
+horizontal_alignment = 1
+
+[node name="Label2" type="Label" parent="Platform/Advertical/Safall"]
+z_index = -1
+z_as_relative = false
+offset_top = 9.0
+offset_right = 7.0
+offset_bottom = 17.0
+theme = ExtResource("3_frs74")
+text = "A"
+horizontal_alignment = 1
+
+[node name="Label3" type="Label" parent="Platform/Advertical/Safall"]
+z_index = -1
+z_as_relative = false
+offset_top = 18.0
+offset_right = 7.0
+offset_bottom = 26.0
+theme = ExtResource("3_frs74")
+text = "F"
+horizontal_alignment = 1
+
+[node name="Label4" type="Label" parent="Platform/Advertical/Safall"]
+z_index = -1
+z_as_relative = false
+offset_top = 27.0
+offset_right = 7.0
+offset_bottom = 35.0
+theme = ExtResource("3_frs74")
+text = "A"
+horizontal_alignment = 1
+
+[node name="Label5" type="Label" parent="Platform/Advertical/Safall"]
+z_index = -1
+z_as_relative = false
+offset_top = 36.0
+offset_right = 7.0
+offset_bottom = 44.0
+theme = ExtResource("3_frs74")
+text = "L"
+horizontal_alignment = 1
+
+[node name="Label6" type="Label" parent="Platform/Advertical/Safall"]
+z_index = -1
+z_as_relative = false
+offset_top = 45.0
+offset_right = 7.0
+offset_bottom = 53.0
+theme = ExtResource("3_frs74")
+text = "l"
+horizontal_alignment = 1
+
+[node name="Trust" type="Node2D" parent="Platform/Advertical"]
+position = Vector2(5, 8)
+
+[node name="Label" type="Label" parent="Platform/Advertical/Trust"]
+z_index = -1
+z_as_relative = false
+offset_right = 7.0
+offset_bottom = 8.0
+theme = ExtResource("3_frs74")
+text = "T"
+horizontal_alignment = 1
+
+[node name="Label2" type="Label" parent="Platform/Advertical/Trust"]
+z_index = -1
+z_as_relative = false
+offset_top = 9.0
+offset_right = 7.0
+offset_bottom = 17.0
+theme = ExtResource("3_frs74")
+text = "R"
+horizontal_alignment = 1
+
+[node name="Label3" type="Label" parent="Platform/Advertical/Trust"]
+z_index = -1
+z_as_relative = false
+offset_top = 18.0
+offset_right = 7.0
+offset_bottom = 26.0
+theme = ExtResource("3_frs74")
+text = "U"
+horizontal_alignment = 1
+
+[node name="Label4" type="Label" parent="Platform/Advertical/Trust"]
+z_index = -1
+z_as_relative = false
+offset_top = 27.0
+offset_right = 7.0
+offset_bottom = 35.0
+theme = ExtResource("3_frs74")
+text = "S"
+horizontal_alignment = 1
+
+[node name="Label5" type="Label" parent="Platform/Advertical/Trust"]
+z_index = -1
+z_as_relative = false
+offset_top = 36.0
+offset_right = 7.0
+offset_bottom = 44.0
+theme = ExtResource("3_frs74")
+text = "T"
+horizontal_alignment = 1
+
+[node name="Advertical2" type="Node2D" parent="Platform"]
+position = Vector2(898, -510)
+
+[node name="Safall" type="Node2D" parent="Platform/Advertical2"]
+position = Vector2(5, 4)
+
+[node name="Label" type="Label" parent="Platform/Advertical2/Safall"]
+z_index = -1
+z_as_relative = false
+offset_right = 7.0
+offset_bottom = 8.0
+theme = ExtResource("3_frs74")
+text = "S"
+horizontal_alignment = 1
+
+[node name="Label2" type="Label" parent="Platform/Advertical2/Safall"]
+z_index = -1
+z_as_relative = false
+offset_top = 9.0
+offset_right = 7.0
+offset_bottom = 17.0
+theme = ExtResource("3_frs74")
+text = "A"
+horizontal_alignment = 1
+
+[node name="Label3" type="Label" parent="Platform/Advertical2/Safall"]
+z_index = -1
+z_as_relative = false
+offset_top = 18.0
+offset_right = 7.0
+offset_bottom = 26.0
+theme = ExtResource("3_frs74")
+text = "F"
+horizontal_alignment = 1
+
+[node name="Label4" type="Label" parent="Platform/Advertical2/Safall"]
+z_index = -1
+z_as_relative = false
+offset_top = 27.0
+offset_right = 7.0
+offset_bottom = 35.0
+theme = ExtResource("3_frs74")
+text = "A"
+horizontal_alignment = 1
+
+[node name="Label5" type="Label" parent="Platform/Advertical2/Safall"]
+z_index = -1
+z_as_relative = false
+offset_top = 36.0
+offset_right = 7.0
+offset_bottom = 44.0
+theme = ExtResource("3_frs74")
+text = "L"
+horizontal_alignment = 1
+
+[node name="Label6" type="Label" parent="Platform/Advertical2/Safall"]
+z_index = -1
+z_as_relative = false
+offset_top = 45.0
+offset_right = 7.0
+offset_bottom = 53.0
+theme = ExtResource("3_frs74")
+text = "l"
+horizontal_alignment = 1
+
+[node name="Trust" type="Node2D" parent="Platform/Advertical2"]
+position = Vector2(17, 4)
+
+[node name="Label" type="Label" parent="Platform/Advertical2/Trust"]
+z_index = -1
+z_as_relative = false
+offset_right = 7.0
+offset_bottom = 8.0
+theme = ExtResource("3_frs74")
+text = "H"
+horizontal_alignment = 1
+
+[node name="Label2" type="Label" parent="Platform/Advertical2/Trust"]
+z_index = -1
+z_as_relative = false
+offset_top = 9.0
+offset_right = 7.0
+offset_bottom = 17.0
+theme = ExtResource("3_frs74")
+text = "I"
+horizontal_alignment = 1
+
+[node name="Label3" type="Label" parent="Platform/Advertical2/Trust"]
+z_index = -1
+z_as_relative = false
+offset_top = 18.0
+offset_right = 7.0
+offset_bottom = 26.0
+theme = ExtResource("3_frs74")
+text = "R"
+horizontal_alignment = 1
+
+[node name="Label4" type="Label" parent="Platform/Advertical2/Trust"]
+z_index = -1
+z_as_relative = false
+offset_top = 27.0
+offset_right = 7.0
+offset_bottom = 35.0
+theme = ExtResource("3_frs74")
+text = "I"
+horizontal_alignment = 1
+
+[node name="Label5" type="Label" parent="Platform/Advertical2/Trust"]
+z_index = -1
+z_as_relative = false
+offset_top = 36.0
+offset_right = 7.0
+offset_bottom = 44.0
+theme = ExtResource("3_frs74")
+text = "N"
+horizontal_alignment = 1
+
+[node name="Label6" type="Label" parent="Platform/Advertical2/Trust"]
+z_index = -1
+z_as_relative = false
+offset_top = 45.0
+offset_right = 7.0
+offset_bottom = 53.0
+theme = ExtResource("3_frs74")
+text = "G"
+horizontal_alignment = 1
+
+[node name="Advert" type="Label" parent="Platform"]
+z_index = -1
+z_as_relative = false
+offset_left = 213.0
+offset_top = -522.0
+offset_right = 455.0
+offset_bottom = -514.0
+theme = ExtResource("3_frs74")
+text = "Our product is safe for falls up to:"
+
+[node name="Score" type="Label" parent="Platform/Advert"]
+z_index = -1
+z_as_relative = false
+offset_top = 12.0
+offset_right = 77.0
+offset_bottom = 20.0
+theme = ExtResource("3_frs74")
+text = "0 m"
+script = ExtResource("7_o4bgb")
+Score = ExtResource("8_sj54b")
+
+[node name="Brand" type="Label" parent="Platform/Advert"]
+z_index = -1
+z_as_relative = false
+offset_left = 252.0
+offset_top = 19.0
+offset_right = 326.0
+offset_bottom = 32.0
+theme = ExtResource("3_frs74")
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_fonts/font = ExtResource("9_fuppl")
+theme_override_font_sizes/font_size = 5
+text = "Safall"
+
+[node name="Levels" type="Node" parent="."]
+
+[node name="Level" type="Node2D" parent="Levels"]
 position = Vector2(0, -1024)
 
-[node name="Platform" type="TileMap" parent="Level"]
+[node name="Platform" type="TileMap" parent="Levels/Level"]
 position = Vector2(0, 1024)
 tile_set = ExtResource("2_pg232")
 format = 2
 layer_0/name = "Background"
 layer_0/z_index = -3
-layer_0/tile_data = PackedInt32Array(-4390912, 196610, 7, -4325376, 196610, 7, -4259840, 196610, 7, -4456448, 196610, 7, -4521984, 196610, 7, -4587520, 196610, 7, -4653056, 196610, 7, -4718592, 196610, 7, -4784128, 196610, 7, -4849664, 196610, 7, -4915200, 196610, 7, -4980736, 196610, 7, -5046272, 196610, 7, -5111808, 196610, 7, -5177344, 196610, 7, -5242880, 196610, 7, -5308416, 196610, 7, -5373952, 196610, 7, -5439488, 196610, 7, -5505024, 196610, 7, -5570560, 196610, 7, -5636096, 196610, 7, -5701632, 196610, 7, -5767168, 196610, 7, -5832704, 196610, 7, -5898240, 196610, 7, -5963776, 196610, 7, -6029312, 196610, 7, -6094848, 196610, 7, -6160384, 196610, 7, -6225920, 196610, 7, -6291456, 196610, 7, -6291393, 196610, 7, -6225857, 196610, 7, -6160321, 196610, 7, -6094785, 196610, 7, -6029249, 196610, 7, -5963713, 196610, 7, -5898177, 196610, 7, -5832641, 196610, 7, -5767105, 196610, 7, -5701569, 196610, 7, -5636033, 196610, 7, -5570497, 196610, 7, -5504961, 196610, 7, -5439425, 196610, 7, -5373889, 196610, 7, -5308353, 196610, 7, -5242817, 196610, 7, -5177281, 196610, 7, -5111745, 196610, 7, -5046209, 196610, 7, -4980673, 196610, 7, -4915137, 196610, 7, -4849601, 196610, 7, -4784065, 196610, 7, -4718529, 196610, 7, -4652993, 196610, 7, -4587457, 196610, 7, -4521921, 196610, 7, -4456385, 196610, 7, -4390849, 196610, 7, -4325313, 196610, 7, -4259777, 196610, 7, -4325370, 589826, 6, -4325371, 589826, 5, -4325372, 589826, 5, -4325373, 589826, 5, -4325374, 589826, 5, -4325375, 589826, 5, -4259839, 589826, 6, -4718581, 131076, 0, -4718580, 196612, 0, -4718579, 131076, 0, -4718578, 196612, 0, -4718577, 131076, 0, -4718576, 196612, 0)
+layer_0/tile_data = PackedInt32Array(-4390912, 196610, 7, -4325376, 196610, 7, -4259840, 196610, 7, -4456448, 196610, 7, -4521984, 196610, 7, -4587520, 196610, 7, -4653056, 196610, 7, -4718592, 196610, 7, -4784128, 196610, 7, -4849664, 196610, 7, -4915200, 196610, 7, -4980736, 196610, 7, -5046272, 196610, 7, -5111808, 196610, 7, -5177344, 196610, 7, -5242880, 196610, 7, -5308416, 196610, 7, -5373952, 196610, 7, -5439488, 196610, 7, -5505024, 196610, 7, -5570560, 196610, 7, -5636096, 196610, 7, -5701632, 196610, 7, -5767168, 196610, 7, -5832704, 196610, 7, -5898240, 196610, 7, -5963776, 196610, 7, -6029312, 196610, 7, -6094848, 196610, 7, -6160384, 196610, 7, -6225920, 196610, 7, -6291456, 196610, 7, -6291393, 196610, 7, -6225857, 196610, 7, -6160321, 196610, 7, -6094785, 196610, 7, -6029249, 196610, 7, -5963713, 196610, 7, -5898177, 196610, 7, -5832641, 196610, 7, -5767105, 196610, 7, -5701569, 196610, 7, -5636033, 196610, 7, -5570497, 196610, 7, -5504961, 196610, 7, -5439425, 196610, 7, -5373889, 196610, 7, -5308353, 196610, 7, -5242817, 196610, 7, -5177281, 196610, 7, -5111745, 196610, 7, -5046209, 196610, 7, -4980673, 196610, 7, -4915137, 196610, 7, -4849601, 196610, 7, -4784065, 196610, 7, -4718529, 196610, 7, -4652993, 196610, 7, -4587457, 196610, 7, -4521921, 196610, 7, -4456385, 196610, 7, -4390849, 196610, 7, -4325313, 196610, 7, -4259777, 196610, 7, -4325370, 589826, 6, -4325371, 589826, 5, -4325372, 589826, 5, -4325373, 589826, 5, -4325374, 589826, 5, -4325375, 589826, 5, -4259839, 589826, 6, -4915174, 4, 4, -4849638, 4, 5, -4784102, 4, 6, -4915173, 65540, 4, -4849637, 65540, 5, -4784101, 65540, 6, -4915172, 196612, 1, -4849636, 196612, 2, -4784100, 131076, 1, -4915171, 327684, 3, -4849635, 4, 1, -4784099, 4, 1, -4915170, 131076, 1, -4849634, 65540, 1, -4784098, 65540, 1, -4915169, 4, 4, -4849633, 4, 5, -4784097, 4, 6, -4915168, 65540, 4, -4849632, 65540, 5, -4784096, 65540, 6, -4915167, 4, 1, -4849631, 4, 2, -4784095, 4, 3, -4915166, 65540, 1, -4849630, 65540, 2, -4784094, 65540, 3, -4915165, 4, 4, -4849629, 4, 5, -4784093, 4, 6, -4915164, 65540, 4, -4849628, 65540, 5, -4784092, 65540, 6, -4653055, 917506, 0, -4587519, 983042, 0, -4521983, 983042, 1, -4456447, 983042, 2, -4653054, 917506, 0, -4587518, 1048578, 0, -4521982, 1048578, 1, -4456446, 1048578, 2, -4653053, 917506, 0, -4587517, 1114114, 0, -4521981, 1114114, 1, -4456445, 1114114, 2, -4653052, 917506, 0, -4587516, 1179650, 0, -4521980, 1179650, 1, -4456444, 1179650, 2, -4653051, 917506, 0, -4587515, 1245186, 0, -4521979, 1245186, 1, -4456443, 1245186, 2, -4653050, 1310722, 0, -4587514, 1310722, 1, -4521978, 1310722, 1, -4456442, 1310722, 1, -4784115, 2, 4, -4784114, 65538, 4, -4784116, 196610, 4, -4784113, 262146, 4, -4784112, 262146, 4, -4784111, 262146, 4, -4784110, 262146, 4, -4784109, 262146, 4, -4784108, 262146, 4, -4784107, 262146, 4, -4784106, 262146, 4, -4784105, 327682, 4, -4784104, 262146, 4, -4849651, 1507330, 1, -4915187, 1507330, 1, -4980723, 1507330, 1, -5046259, 1507330, 1, -5111795, 1507330, 1, -4849650, 1376258, 1, -4849649, 1441794, 1, -4980721, 1376258, 1, -4980720, 1441794, 1, -5111792, 1376258, 1, -5111791, 1441794, 1, -4849648, 1376258, 1, -4849647, 1441794, 1, -4980719, 1376258, 1, -4980718, 1441794, 1, -5111790, 1376258, 1, -5111789, 1441794, 1, -4849646, 1376258, 1, -4849645, 1441794, 1, -4980717, 1376258, 1, -4980716, 1441794, 1, -5111788, 1376258, 1, -5111787, 1441794, 1, -4849644, 1376258, 1, -4849643, 1441794, 1, -4980715, 1376258, 1, -4980714, 1441794, 1, -5111786, 1376258, 1, -5111785, 1441794, 1, -5111784, 1572866, 1, -4980712, 1572866, 1, -4849640, 1572866, 1, -4849642, 1376258, 1, -4849641, 1441794, 1, -4980713, 1376258, 1, -4915177, 1376258, 0, -5046250, 1376258, 0, -5046252, 1376258, 0, -5046251, 1441794, 0, -5046249, 1441794, 0, -4915179, 1376258, 0, -4915178, 1441794, 0, -4915181, 1376258, 0, -4915180, 1441794, 0, -4915183, 1376258, 0, -4915182, 1441794, 0, -4915185, 1376258, 0, -4915184, 1441794, 0, -4915186, 1441794, 0, -5046254, 1376258, 0, -5046253, 1441794, 0, -5046256, 1376258, 0, -5046255, 1441794, 0, -5046258, 1376258, 0, -5046257, 1441794, 0, -4980722, 1441794, 1, -5111793, 1441794, 1, -5111794, 1376258, 1, -4915176, 1572866, 0, -5046248, 1572866, 0, -5177331, 1376258, 2, -5177330, 1441794, 2, -5177329, 1507330, 2, -5177328, 1376258, 2, -5177327, 1441794, 2, -5177326, 1507330, 2, -5177325, 1376258, 2, -5177324, 1441794, 2, -5177323, 1507330, 2, -5177322, 1376258, 2, -5177321, 1441794, 2, -5177320, 1572866, 2, -5177332, 458755, 4, -5242869, 262147, 6, -5177333, 196611, 6, -5111797, 196611, 6, -5046261, 458755, 6, -4980725, 327683, 1, -4718591, 1048578, 9, -4849663, 1048578, 9, -4784127, 1048578, 8, -4915199, 1048578, 8, -4980735, 1048578, 7, -4980734, 1114114, 7, -4980733, 1114114, 7, -4980732, 1114114, 7, -4980731, 1114114, 7, -4980730, 1179650, 7, -4915194, 1179650, 8, -4849658, 1179650, 9, -4784122, 1179650, 8, -4718586, 1179650, 9, -4718590, 1114114, 9, -4718589, 1114114, 9, -4718588, 1114114, 9, -4718587, 1114114, 9, -4849662, 1114114, 9, -4849661, 1114114, 9, -4849660, 1114114, 9, -4849659, 1114114, 9, -4784126, 1114114, 8, -4784125, 1114114, 8, -4784124, 1114114, 8, -4784123, 1114114, 8, -4915195, 1114114, 8, -4915196, 1114114, 8, -4915197, 1114114, 8, -4915198, 1114114, 8, -4325320, 589826, 5, -4390855, 589826, 5, -4456390, 589826, 5, -4521925, 589826, 5, -4587460, 589826, 5, -4652995, 589826, 5, -4718530, 589826, 5, -4325319, 589826, 6, -4390854, 589826, 6, -4456389, 589826, 6, -4521924, 589826, 6, -4587459, 589826, 6, -4652994, 589826, 6, -4325321, 589826, 805306374, -4390856, 589826, 805306374, -4456391, 589826, 805306374, -4521926, 589826, 805306374, -4587461, 589826, 805306374, -4652996, 589826, 805306374, -4718531, 589826, 805306374, -4784066, 589826, 805306374, -4718554, 589826, 5, -4718553, 589826, 5, -4718552, 589826, 5, -4718551, 589826, 5, -4653015, 589826, 5, -4587479, 589826, 5, -4521943, 589826, 5, -4456407, 589826, 5, -4390871, 589826, 5, -4718549, 589826, 5, -4653013, 589826, 5, -4587477, 589826, 5, -4521941, 589826, 5, -4456405, 589826, 5, -4390869, 589826, 5, -4587478, 589826, 5, -4390868, 589826, 5, -4521942, 589826, 6, -4653014, 589826, 805306374, -4456404, 589826, 1610612742, -4390867, 589826, 1610612742, -5242868, 2, 0, -5242867, 65538, 0, -5242866, 65538, 0, -5242865, 65538, 0, -5242864, 65538, 0, -5242863, 65538, 0, -5242862, 65538, 0, -5242861, 65538, 0, -5242860, 65538, 0, -5242859, 65538, 0, -5242858, 65538, 0, -5242857, 65538, 0, -5242856, 262146, 268435456, -5373940, 262146, 10, -5308404, 262146, 11, -5373941, 196610, 10, -5373942, 196610, 10, -5373943, 196610, 10, -5373944, 196610, 10, -5373945, 196610, 10, -5373946, 196610, 10, -5373947, 196610, 10, -5373948, 196610, 10, -5373949, 196610, 10, -5373950, 196610, 10, -5373951, 131074, 10, -5308415, 131074, 11, -5308414, 196610, 11, -5308413, 196610, 11, -5308412, 196610, 11, -5308411, 196610, 11, -5308410, 196610, 11, -5308409, 196610, 11, -5308408, 196610, 11, -5308407, 196610, 11, -5308406, 196610, 11, -5308405, 196610, 11, -5242879, 2, 12, -5242878, 65538, 12, -5242877, 65538, 12, -5242876, 65538, 12, -5242875, 65538, 12, -5242874, 65538, 12, -5242873, 65538, 12, -5242872, 65538, 12, -5242871, 65538, 12, -5242870, 65538, 12, -5177334, 65538, 14, -5177335, 65538, 14, -5177336, 65538, 14, -5177337, 65538, 14, -5177338, 65538, 14, -5177339, 65538, 14, -5177340, 65538, 14, -5177341, 65538, 14, -5177342, 65538, 14, -5177343, 2, 14, -5373938, 196612, 5, -5373937, 196612, 5, -5373936, 196612, 5, -5373935, 196612, 5, -5373934, 196612, 5, -5373933, 196612, 5, -5373931, 589826, 6)
 layer_1/name = "BackgroundOverlay"
 layer_1/z_index = -2
-layer_1/tile_data = PackedInt32Array()
+layer_1/tile_data = PackedInt32Array(-5046261, 327683, 0, -5046258, 1441794, 6, -4980722, 1441794, 7, -4915186, 1441794, 8, -5046257, 1507330, 6, -4980721, 1507330, 7, -4915185, 1507330, 8, -5046256, 1507330, 6, -4980720, 1507330, 7, -4915184, 1507330, 8, -5046255, 1572866, 6, -4980719, 1572866, 7, -4915183, 1572866, 8, -5046252, 1441794, 6, -4980716, 1441794, 7, -4915180, 1441794, 8, -5046251, 1507330, 6, -4980715, 1507330, 7, -4915179, 1507330, 8, -5046250, 1507330, 6, -4980714, 1507330, 7, -4915178, 1507330, 8, -5046249, 1572866, 6, -4980713, 1572866, 7, -4915177, 1572866, 8, -4915182, 720898, 0, -4849646, 720898, 1, -4915181, 786434, 0, -4849645, 786434, 1, -4849661, 1114114, 3, -4784125, 1114114, 5, -4849660, 1310722, 3, -4784124, 1310722, 5, -4980733, 393218, 7, -4915195, 458754, 7, -4849659, 458754, 11, -4980734, 327682, 9, -4784126, 327682, 11, -4915198, 327682, 10, -4849662, 327682, 10, -4915196, 327682, 8, -4718589, 262146, 7, -4718588, 262146, 7, -4718591, 589826, 3, -5177336, 327682, 6, -5242875, 262146, 6, -5308406, 327682, 5, -5308413, 262146, 5)
 layer_2/name = "Props"
 layer_2/z_index = -1
-layer_2/tile_data = PackedInt32Array()
+layer_2/tile_data = PackedInt32Array(-5111794, 589826, 3, -5046258, 589826, 4, -4849645, 720898, 6, -4915177, 786434, 6, -4915176, 1048578, 4, -4849640, 1048578, 6, -4849641, 786434, 5, -4849644, 983042, 4, -4849643, 983042, 4, -4849642, 983042, 4, -4849652, 131075, 4)
 layer_3/name = "Platforms"
-layer_3/tile_data = PackedInt32Array(-4390911, 4, 0, -4390910, 65540, 0, -4390909, 4, 0, -4390908, 65540, 0, -4390907, 4, 0, -4390906, 65540, 0)
+layer_3/tile_data = PackedInt32Array(-4390911, 4, 0, -4390910, 65540, 0, -4390909, 4, 0, -4390908, 65540, 0, -4390907, 4, 0, -4390906, 65540, 0, -4849640, 65540, 1610612743, -4784104, 4, 1610612743, -4718568, 131076, 6, -4980711, 65540, 1610612743, -4915175, 4, 1610612743, -4849639, 65540, 1610612744, -4784103, 4, 1610612744, -4718567, 196612, 6, -4980710, 196612, 4, -4718566, 196612, 6, -4980709, 196612, 4, -4718565, 196612, 6, -4980708, 131076, 0, -4718564, 327684, 4, -4980707, 196612, 0, -4718563, 196612, 6, -4980706, 196612, 4, -4718562, 196612, 6, -4980705, 131076, 0, -4718561, 196612, 6, -4980704, 196612, 0, -4718560, 196612, 6, -4980703, 131076, 0, -4718559, 196612, 6, -4980702, 196612, 0, -4718558, 327684, 4, -5046237, 131076, 7, -4980701, 131076, 8, -4718557, 196612, 6, -5046236, 196612, 7, -4980700, 196612, 8, -4718556, 196612, 6, -5046235, 262148, 4, -4980699, 327684, 5, -4915163, 262148, 5, -4849627, 262148, 5, -4784091, 262148, 5, -4718555, 262148, 6, -4718581, 131076, 0, -4718580, 196612, 0, -4718579, 131076, 0, -4718578, 196612, 0, -4718577, 131076, 0, -4718576, 196612, 0, -5046268, 4, 7, -4980732, 4, 8, -5046267, 65540, 7, -4980731, 65540, 8, -5046271, 131076, 0, -5046270, 196612, 0, -5046269, 196612, 4, -4259779, 4, 0, -4259778, 65540, 0, -4259781, 4, 0, -4259780, 65540, 0, -4259783, 4, 0, -4259782, 65540, 0, -4259785, 4, 0, -4259784, 65540, 0, -4325335, 4, 0, -4325334, 65540, 0, -4325333, 4, 0, -4325332, 65540, 0, -4325331, 4, 0, -4325330, 65540, 0, -4784090, 4, 0, -4784089, 65540, 0, -4784088, 4, 0, -4784087, 65540, 0, -4784086, 4, 0, -4784085, 65540, 0, -5439465, 4, 0, -5439464, 65540, 0, -5439467, 4, 0, -5439466, 65540, 0, -5439468, 262148, 4, -5373932, 262148, 5, -5308396, 262148, 6, -5308397, 196612, 6, -5308398, 196612, 6, -5308399, 196612, 6, -5308400, 196612, 6, -5308401, 196612, 6, -5308402, 196612, 6, -5308403, 131076, 6, -5373939, 131076, 5, -5439475, 131076, 4, -5439474, 196612, 4, -5439473, 196612, 4, -5439472, 196612, 4, -5439471, 196612, 4, -5439470, 196612, 4, -5439469, 196612, 4)
 layer_4/name = "Foreground"
 layer_4/z_index = 1
-layer_4/tile_data = PackedInt32Array()
+layer_4/tile_data = PackedInt32Array(-4915187, 3, 2, -4849651, 3, 3, -4784115, 3, 4, -4915186, 65539, 2, -4849650, 65539, 3, -4784114, 65539, 4, -4521978, 131075, 2, -4456442, 131075, 3, -4587458, 393218, 7, -4587459, 327682, 9, -4456388, 327682, 9, -4325316, 262146, 7, -4390852, 327682, 10, -4521923, 327682, 10, -4456387, 458754, 11, -4521922, 393218, 4, -4456386, 393218, 5, -4325315, 458754, 6, -4325314, 524290, 6, -4390850, 393218, 1342177286)
 
-[node name="Ground" type="StaticBody2D" parent="Level/Platform"]
+[node name="Ground" type="StaticBody2D" parent="Levels/Level/Platform"]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Level/Platform/Ground"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Levels/Level/Platform/Ground"]
 position = Vector2(64, -1070)
 shape = SubResource("RectangleShape2D_36utx")
 one_way_collision = true
 
-[node name="CollisionShape2D2" type="CollisionShape2D" parent="Level/Platform/Ground"]
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="Levels/Level/Platform/Ground"]
 position = Vector2(224, -1144)
 shape = SubResource("RectangleShape2D_aodtc")
 
-[connection signal="Score" from="Player" to="." method="HandleScore"]
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="Levels/Level/Platform/Ground"]
+position = Vector2(512, -1176)
+shape = SubResource("RectangleShape2D_chk7x")
+
+[node name="CollisionShape2D9" type="CollisionShape2D" parent="Levels/Level/Platform/Ground"]
+position = Vector2(272, -1304)
+shape = SubResource("RectangleShape2D_vdxsi")
+
+[node name="CollisionShape2D4" type="CollisionShape2D" parent="Levels/Level/Platform/Ground"]
+position = Vector2(40, -1224)
+shape = SubResource("RectangleShape2D_jp1cu")
+
+[node name="CollisionShape2D5" type="CollisionShape2D" parent="Levels/Level/Platform/Ground"]
+position = Vector2(704, -1054)
+shape = SubResource("RectangleShape2D_vxjdm")
+one_way_collision = true
+
+[node name="CollisionShape2D6" type="CollisionShape2D" parent="Levels/Level/Platform/Ground"]
+position = Vector2(656, -1166)
+shape = SubResource("RectangleShape2D_x2kou")
+one_way_collision = true
+
+[node name="CollisionShape2D7" type="CollisionShape2D" parent="Levels/Level/Platform/Ground"]
+position = Vector2(944, -1038)
+shape = SubResource("RectangleShape2D_hgxwn")
+one_way_collision = true
+
+[node name="CollisionShape2D8" type="CollisionShape2D" parent="Levels/Level/Platform/Ground"]
+position = Vector2(368, -1326)
+shape = SubResource("RectangleShape2D_ukxmv")
+one_way_collision = true
+
+[node name="CollisionPolygon" type="CollisionPolygon2D" parent="Levels/Level/Platform/Ground"]
+position = Vector2(476, -1224)
+polygon = PackedVector2Array(-60, 8, -60, 88, -92, 88, -92, 71)
+
+[node name="CollisionPolygon2" type="CollisionPolygon2D" parent="Levels/Level/Platform/Ground"]
+position = Vector2(657, -1264)
+polygon = PackedVector2Array(-49, 32, -49, 48, -97, 48, -65, 32)
+
+[node name="CollisionPolygon3" type="CollisionPolygon2D" parent="Levels/Level/Platform/Ground"]
+position = Vector2(145, -1248)
+polygon = PackedVector2Array(-49, 32, -49, 48, -81, 48, -81, 32, -97, 16, -81, 16)
+
+[node name="Player" parent="." instance=ExtResource("3_w2er8")]
+position = Vector2(208, -1172)

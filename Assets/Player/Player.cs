@@ -5,11 +5,11 @@ using static Godot.WebSocketPeer;
 
 public partial class Player : RigidBody2D
 {
-    [Signal]
-    public delegate void ScoreEventHandler();
-
     [Export]
     int Speed = 200;
+
+    [Export]
+    private ScoreSourceOfTruth Score;
 
     [Export]
     Label DistanceFallen;
@@ -133,7 +133,9 @@ public partial class Player : RigidBody2D
         {
             DistanceFallen.Show();
             DistanceFallen.Text = $"{distanceFallen:0.00} m";
-            EmitSignal(SignalName.Score, distanceFallen);
+
+            Score.Score = distanceFallen;
+
             Animation.Play("splat");
         }
         else

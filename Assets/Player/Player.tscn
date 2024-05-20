@@ -1,9 +1,10 @@
-[gd_scene load_steps=16 format=3 uid="uid://cdb8ascv60w6m"]
+[gd_scene load_steps=17 format=3 uid="uid://cdb8ascv60w6m"]
 
 [ext_resource type="SpriteFrames" uid="uid://cek45u8lpr1um" path="res://Assets/Player/PlayerAnimation.tres" id="1_0m1k7"]
 [ext_resource type="PhysicsMaterial" uid="uid://bwit6m5lwgh5d" path="res://Assets/Player/PlayerRagdollPhysics.tres" id="1_2gtoc"]
 [ext_resource type="Script" path="res://Assets/Player/Player.cs" id="1_6hho7"]
 [ext_resource type="PhysicsMaterial" uid="uid://c58a8xbvj0w0y" path="res://Assets/Player/PlayerControlledPhysics.tres" id="1_f8gyt"]
+[ext_resource type="Resource" uid="uid://dtvx5wogt0yb6" path="res://Assets/Score/Score.tres" id="2_ii7qn"]
 [ext_resource type="FontFile" uid="uid://jvioeod3wvrd" path="res://Fonts/GravityRegular5.ttf" id="5_562yd"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_grlpi"]
@@ -201,6 +202,7 @@ physics_material_override = SubResource("PhysicsMaterial_grlpi")
 lock_rotation = true
 continuous_cd = 1
 script = ExtResource("1_6hho7")
+Score = ExtResource("2_ii7qn")
 DistanceFallen = NodePath("DistanceFallen")
 Sprite = NodePath("AnimatedSprite2D")
 Animation = NodePath("AnimationPlayer")

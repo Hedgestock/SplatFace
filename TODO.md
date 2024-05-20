@@ -1,3 +1,5 @@
 - [x] Fix the double jump issue
 - [x] Fix the jumpsquat ignoring dash time
 - [x] Add falling from platform
+- [x] Make score a resource
+- [ ] Fix the splatting on slants
