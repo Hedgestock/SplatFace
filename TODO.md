@@ -1,2 +1,3 @@
 - [x] Fix the double jump issue
-- [ ] Fix the jumpsquat ignoring dash time
+- [x] Fix the jumpsquat ignoring dash time
+- [x] Add falling from platform
