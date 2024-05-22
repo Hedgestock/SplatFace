@@ -42,6 +42,9 @@ public partial class Player : RigidBody2D
     public override void _PhysicsProcess(double delta)
     {
         base._PhysicsProcess(delta);
+
+        GroundRayCast.TargetPosition = new Vector2(0, (float)Mathf.Max(LinearVelocity.Y * 2 * delta, 5));
+
         if (IsActionable)
         {
             float direction = Input.GetAxis("move_left", "move_right");
@@ -64,8 +67,7 @@ public partial class Player : RigidBody2D
         }
         else
         {
-            GroundRayCast.TargetPosition = new Vector2(0, (float)Mathf.Max(LinearVelocity.Y * 2 * delta, 5));
-            if (Animation.AssignedAnimation != "fall" && LinearVelocity.Y > 0)
+            if (CanFall && LinearVelocity.Y >= 0)
             {
                 Fall();
             }
@@ -78,7 +80,7 @@ public partial class Player : RigidBody2D
         if (ShouldRagdoll) { PhysicsMaterialOverride = RagdollPhysics; }
         else { PhysicsMaterialOverride = ControlledPhysics; }
 
-        DebugLabel.Text = $"{Animation.AssignedAnimation} - {Sprite.Animation}\ngrounded: {GroundRayCast.IsColliding()}\nactionable: {IsActionable}\n{LinearVelocity.Y * delta:0.0}";
+        DebugLabel.Text = $"{Animation.AssignedAnimation} - {Sprite.Animation}\ngrounded: {GroundRayCast.IsColliding()}\nactionable: {IsActionable}\n{LinearVelocity.Y:0.0}";
     }
 
     public override void _IntegrateForces(PhysicsDirectBodyState2D state)
@@ -92,10 +94,10 @@ public partial class Player : RigidBody2D
         {
             JumpSquat();
         }
-        //else if (@event.IsActionPressed("pause"))
-        //{
-        //    GetTree().Paused = !GetTree().Paused;
-        //}
+        else if (@event.IsActionPressed("pause"))
+        {
+            DebugLabel.Visible = !DebugLabel.Visible;
+        }
     }
 
     void JumpSquat()
@@ -119,8 +121,6 @@ public partial class Player : RigidBody2D
 
     void Fall()
     {
-        if (GroundRayCast.IsColliding()) return;
-
         FallingHeight = Position.Y;
         Animation.Play("fall");
         DistanceFallen.Hide();
@@ -152,11 +152,14 @@ public partial class Player : RigidBody2D
     bool IsActionable
     { get { return GroundRayCast.IsColliding() && !new List<string>() { "jump", "fall", "land", "splat" }.Contains(Sprite.Animation); } }
 
+    bool CanFall
+    { get { return !new List<string>() { "fall", "land", "splat" }.Contains(Sprite.Animation); } }
+
     private bool _lockWalkState = false;
 
     bool IsWalking
     { get { return Input.IsActionPressed("walk") || Sprite.Animation == "walk" || _lockWalkState; } }
 
     bool ShouldRagdoll
-    { get { return !GroundRayCast.IsColliding(); } }
+    { get { return !GroundRayCast.IsColliding() || Sprite.Animation == "jump"; } }
 }
