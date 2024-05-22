@@ -1,4 +1,4 @@
-[gd_scene load_steps=31 format=3 uid="uid://4vdsghonlo2d"]
+[gd_scene load_steps=32 format=3 uid="uid://4vdsghonlo2d"]
 
 [ext_resource type="TileSet" uid="uid://bkawqph4bvxg0" path="res://Assets/TileSets/BackgroundTileSet.tres" id="1_guc81"]
 [ext_resource type="Script" path="res://Scenes/Game.cs" id="1_x6a0h"]
@@ -11,6 +11,7 @@
 [ext_resource type="Resource" uid="uid://dtvx5wogt0yb6" path="res://Assets/Score/Score.tres" id="8_sj54b"]
 [ext_resource type="FontFile" uid="uid://jvioeod3wvrd" path="res://Fonts/GravityRegular5.ttf" id="9_fuppl"]
 [ext_resource type="PackedScene" uid="uid://c1n02j7a0qt7y" path="res://Scenes/Levels/TrashyLevel.tscn" id="10_k8esl"]
+[ext_resource type="Theme" uid="uid://b7ixdh8fqowrp" path="res://PopUpTheme.tres" id="12_1ueal"]
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_h4eep"]
 
@@ -668,3 +669,55 @@ text = "Safall"
 
 [node name="Player" parent="." instance=ExtResource("3_w2er8")]
 position = Vector2(220, -898)
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 0
+theme = ExtResource("12_1ueal")
+
+[node name="PanelContainer" type="PanelContainer" parent="CanvasLayer/MarginContainer"]
+layout_mode = 2
+size_flags_vertical = 0
+
+[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/MarginContainer/PanelContainer"]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/MarginContainer/PanelContainer/MarginContainer"]
+layout_mode = 2
+size_flags_vertical = 0
+
+[node name="Label" type="RichTextLabel" parent="CanvasLayer/MarginContainer/PanelContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 8
+bbcode_enabled = true
+text = "[center] Hello, and welcome to the [b]SAFALL[/b] implant test program.
+
+Your profile has been selected amongst the population of [b]Verticity[/b] due to your small size and weight, making it less likely for you to get hurt during the process.
+[i] (it has nothing to do with the fact that the dev needed a free sprite with a \"splat\" animation and this one was one of the few available on itch.io)[/i]
+
+Your designated job is to climb up the city to the highest level you can reach, and jump off the furthest down you can to prove the effectiveness of our newly developed implant that aims to reduce casualties and fatalities in the ever-growing vertical megalopolis.
+
+You can hold CTRL to walk, the rest should be intuitive. [b]SAFALL[/b] thanks you for your dedication and assure you that if any problem were to occur to you, no one will be held responsible."
+fit_content = true
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/MarginContainer/PanelContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="Button" type="Button" parent="CanvasLayer/MarginContainer/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+text = "I understand the risks"
+
+[node name="Button2" type="Button" parent="CanvasLayer/MarginContainer/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+text = "The risks have been understood"
+
+[connection signal="pressed" from="CanvasLayer/MarginContainer/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/Button" to="CanvasLayer/MarginContainer" method="hide"]
+[connection signal="pressed" from="CanvasLayer/MarginContainer/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/Button2" to="CanvasLayer/MarginContainer" method="hide"]
