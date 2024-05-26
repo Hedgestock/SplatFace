@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://cdb8ascv60w6m"]
+[gd_scene load_steps=21 format=3 uid="uid://cdb8ascv60w6m"]
 
 [ext_resource type="SpriteFrames" uid="uid://cek45u8lpr1um" path="res://Assets/Player/PlayerAnimation.tres" id="1_0m1k7"]
 [ext_resource type="PhysicsMaterial" uid="uid://bwit6m5lwgh5d" path="res://Assets/Player/PlayerRagdollPhysics.tres" id="1_2gtoc"]
@@ -6,6 +6,10 @@
 [ext_resource type="PhysicsMaterial" uid="uid://c58a8xbvj0w0y" path="res://Assets/Player/PlayerControlledPhysics.tres" id="1_f8gyt"]
 [ext_resource type="Resource" uid="uid://dtvx5wogt0yb6" path="res://Assets/Score/Score.tres" id="2_ii7qn"]
 [ext_resource type="FontFile" uid="uid://jvioeod3wvrd" path="res://Fonts/GravityRegular5.ttf" id="5_562yd"]
+[ext_resource type="AudioStream" uid="uid://bi0slg1spn3ao" path="res://Sounds/running-1-6846.mp3" id="7_ift0q"]
+[ext_resource type="Script" path="res://Assets/Player/PlayerSounds.cs" id="7_k2axt"]
+[ext_resource type="AudioStream" uid="uid://cpc2yv38m4la3" path="res://Sounds/Splat.mp3" id="9_xt07s"]
+[ext_resource type="AudioStream" uid="uid://dbtotl0xhrli" path="res://Sounds/land.mp3" id="10_is2w7"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_grlpi"]
 
@@ -30,6 +34,20 @@ tracks/0/keys = {
 "method": &"play"
 }]
 }
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AudioStreamPlayer2D")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"stop"
+}]
+}
 
 [sub_resource type="Animation" id="Animation_hd3pe"]
 resource_name = "idle"
@@ -46,6 +64,20 @@ tracks/0/keys = {
 "values": [{
 "args": [&"idle", 1.0, false],
 "method": &"play"
+}]
+}
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AudioStreamPlayer2D")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"stop"
 }]
 }
 
@@ -80,6 +112,20 @@ tracks/1/keys = {
 "method": &"play"
 }]
 }
+tracks/2/type = "method"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("AudioStreamPlayer2D")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"stop"
+}]
+}
 
 [sub_resource type="Animation" id="Animation_gw1oy"]
 resource_name = "land"
@@ -112,6 +158,20 @@ tracks/1/keys = {
 "method": &"play"
 }]
 }
+tracks/2/type = "method"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("AudioStreamPlayer2D")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"Land"
+}]
+}
 
 [sub_resource type="Animation" id="Animation_xoc5b"]
 resource_name = "run"
@@ -131,6 +191,23 @@ tracks/0/keys = {
 }, {
 "args": [&"run", 1.0, false],
 "method": &"play"
+}]
+}
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AudioStreamPlayer2D")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(1, 1),
+"values": [{
+"args": [],
+"method": &"stop"
+}, {
+"args": [],
+"method": &"Run"
 }]
 }
 
@@ -166,6 +243,20 @@ tracks/1/keys = {
 "method": &"play"
 }]
 }
+tracks/2/type = "method"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("AudioStreamPlayer2D")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"Splat"
+}]
+}
 
 [sub_resource type="Animation" id="Animation_3dedj"]
 resource_name = "walk"
@@ -182,6 +273,20 @@ tracks/0/keys = {
 "values": [{
 "args": [&"walk", 1.0, false],
 "method": &"play"
+}]
+}
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AudioStreamPlayer2D")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"stop"
 }]
 }
 
@@ -280,3 +385,10 @@ grow_horizontal = 2
 theme_override_fonts/font = ExtResource("5_562yd")
 theme_override_font_sizes/font_size = 5
 horizontal_alignment = 1
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+autoplay = true
+script = ExtResource("7_k2axt")
+Running = ExtResource("7_ift0q")
+Splatting = ExtResource("9_xt07s")
+Landing = ExtResource("10_is2w7")

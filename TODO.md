@@ -2,5 +2,6 @@
 - [x] Fix the jumpsquat ignoring dash time
 - [x] Add falling from platform
 - [x] Make score a resource
-- [ ] Make levels despawn on fall
+- [x] Make levels despawn on fall
+- [ ] Save score
 - [ ] Fix the splatting on slants

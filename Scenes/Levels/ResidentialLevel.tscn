@@ -1,10 +1,10 @@
-[gd_scene load_steps=21 format=3 uid="uid://c1n02j7a0qt7y"]
+[gd_scene load_steps=21 format=3 uid="uid://1g1143hfmdln"]
 
-[ext_resource type="TileSet" uid="uid://cym1xc2552p54" path="res://Assets/TileSets/MainTileSet.tres" id="1_3hahy"]
-[ext_resource type="Script" path="res://Scenes/Levels/Level.cs" id="1_remwd"]
-[ext_resource type="Theme" uid="uid://bem3ojr8yyndj" path="res://BillboardTheme.tres" id="2_hkqk0"]
-[ext_resource type="Script" path="res://Scenes/ScoreLabel.cs" id="3_ydlyv"]
-[ext_resource type="Resource" uid="uid://dtvx5wogt0yb6" path="res://Assets/Score/Score.tres" id="4_yyy4i"]
+[ext_resource type="Script" path="res://Scenes/Levels/Level.cs" id="1_rj4ns"]
+[ext_resource type="TileSet" uid="uid://cym1xc2552p54" path="res://Assets/TileSets/MainTileSet.tres" id="2_boeex"]
+[ext_resource type="Theme" uid="uid://bem3ojr8yyndj" path="res://BillboardTheme.tres" id="3_py8ln"]
+[ext_resource type="Script" path="res://Scenes/ScoreLabel.cs" id="4_obynt"]
+[ext_resource type="Resource" uid="uid://dtvx5wogt0yb6" path="res://Assets/Score/Score.tres" id="5_jbi7k"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_36utx"]
 size = Vector2(96, 4)
@@ -51,12 +51,12 @@ size = Vector2(32, 4)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_wqav5"]
 size = Vector2(1024, 20)
 
-[node name="TrashyLevel" type="Node2D" node_paths=PackedStringArray("TriggerArea")]
-script = ExtResource("1_remwd")
+[node name="ResidentialLevel" type="Node2D" node_paths=PackedStringArray("TriggerArea")]
+script = ExtResource("1_rj4ns")
 TriggerArea = NodePath("Area2D")
 
 [node name="Platform" type="TileMap" parent="."]
-tile_set = ExtResource("1_3hahy")
+tile_set = ExtResource("2_boeex")
 format = 2
 layer_0/name = "Background"
 layer_0/z_index = -3
@@ -156,11 +156,11 @@ offset_left = 402.0
 offset_top = -244.0
 offset_right = 462.0
 offset_bottom = -236.0
-theme = ExtResource("2_hkqk0")
+theme = ExtResource("3_py8ln")
 text = "0 m"
 horizontal_alignment = 1
-script = ExtResource("3_ydlyv")
-Score = ExtResource("4_yyy4i")
+script = ExtResource("4_obynt")
+Score = ExtResource("5_jbi7k")
 
 [node name="Area2D" type="Area2D" parent="."]
 
