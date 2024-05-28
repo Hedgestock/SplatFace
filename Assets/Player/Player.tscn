@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=3 uid="uid://cdb8ascv60w6m"]
+[gd_scene load_steps=24 format=3 uid="uid://cdb8ascv60w6m"]
 
 [ext_resource type="SpriteFrames" uid="uid://cek45u8lpr1um" path="res://Assets/Player/PlayerAnimation.tres" id="1_0m1k7"]
 [ext_resource type="PhysicsMaterial" uid="uid://bwit6m5lwgh5d" path="res://Assets/Player/PlayerRagdollPhysics.tres" id="1_2gtoc"]
@@ -11,6 +11,7 @@
 [ext_resource type="AudioStream" uid="uid://cpc2yv38m4la3" path="res://Sounds/Splat.mp3" id="9_xt07s"]
 [ext_resource type="AudioStream" uid="uid://dbtotl0xhrli" path="res://Sounds/land.mp3" id="10_is2w7"]
 [ext_resource type="AudioStream" uid="uid://iwllrm36ep6b" path="res://Sounds/dr willy full.wav" id="11_d4vsm"]
+[ext_resource type="Script" path="res://Scenes/DebugWindow.cs" id="12_xmbd5"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_grlpi"]
 
@@ -350,8 +351,7 @@ _data = {
 "walk": SubResource("Animation_3dedj")
 }
 
-[node name="Player" type="RigidBody2D" node_paths=PackedStringArray("DistanceFallen", "Music", "Sprite", "Animation", "GroundRayCast", "RightRayCast", "LeftRayCast", "DebugLabel")]
-process_mode = 3
+[node name="Player" type="RigidBody2D" node_paths=PackedStringArray("DistanceFallen", "Music", "Sprite", "Animation", "GroundRayCast", "RightRayCast", "LeftRayCast", "DebugLabel", "DebugWindow")]
 physics_material_override = SubResource("PhysicsMaterial_grlpi")
 lock_rotation = true
 continuous_cd = 1
@@ -366,7 +366,8 @@ RightRayCast = NodePath("RightWallCheck")
 LeftRayCast = NodePath("LeftWallCheck2")
 ControlledPhysics = ExtResource("1_f8gyt")
 RagdollPhysics = ExtResource("1_2gtoc")
-DebugLabel = NodePath("Debug")
+DebugLabel = NodePath("Window/CanvasLayer/Debug")
+DebugWindow = NodePath("Window")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = ExtResource("1_0m1k7")
@@ -418,22 +419,6 @@ theme_override_font_sizes/font_size = 5
 text = "0m"
 horizontal_alignment = 1
 
-[node name="Debug" type="Label" parent="."]
-visible = false
-z_index = 10
-z_as_relative = false
-anchors_preset = 5
-anchor_left = 0.5
-anchor_right = 0.5
-offset_left = 39.0
-offset_top = -4.0
-offset_right = 55.0
-offset_bottom = 1.0
-grow_horizontal = 2
-theme_override_fonts/font = ExtResource("5_562yd")
-theme_override_font_sizes/font_size = 5
-horizontal_alignment = 1
-
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
 autoplay = true
 script = ExtResource("7_k2axt")
@@ -444,3 +429,25 @@ Landing = ExtResource("10_is2w7")
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("11_d4vsm")
 autoplay = true
+
+[node name="Window" type="Window" parent="."]
+position = Vector2i(0, 36)
+size = Vector2i(400, 1000)
+visible = false
+script = ExtResource("12_xmbd5")
+
+[node name="Camera2D" type="Camera2D" parent="Window"]
+position = Vector2(523, -1740)
+zoom = Vector2(0.4, 0.4)
+
+[node name="CanvasLayer" type="CanvasLayer" parent="Window"]
+
+[node name="Debug" type="Label" parent="Window/CanvasLayer"]
+z_index = 10
+z_as_relative = false
+offset_right = 16.0
+offset_bottom = 5.0
+size_flags_horizontal = 0
+size_flags_vertical = 0
+theme_override_fonts/font = ExtResource("5_562yd")
+theme_override_font_sizes/font_size = 20

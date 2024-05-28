@@ -14,9 +14,6 @@ public partial class Game : Node
     [Export]
     private Player Player;
 
-    [Export]
-    private PackedScene DebugCamera;
-
     public override void _Ready()
     {
         base._Ready();

@@ -39,6 +39,8 @@ public partial class Player : RigidBody2D
     [ExportGroup("Debug")]
     [Export]
     Label DebugLabel;
+    [Export]
+    Window DebugWindow;
 
     private float FallingHeight = 0;
 
@@ -106,7 +108,7 @@ public partial class Player : RigidBody2D
         }
         if (@event.IsActionPressed("pause"))
         {
-            DebugLabel.Visible = !DebugLabel.Visible;
+            DebugWindow.Visible = !DebugWindow.Visible;
         }
     }
 

@@ -1,4 +1,4 @@
-[gd_scene load_steps=35 format=3 uid="uid://4vdsghonlo2d"]
+[gd_scene load_steps=34 format=3 uid="uid://4vdsghonlo2d"]
 
 [ext_resource type="TileSet" uid="uid://bkawqph4bvxg0" path="res://Assets/TileSets/BackgroundTileSet.tres" id="1_guc81"]
 [ext_resource type="Script" path="res://Scenes/Game.cs" id="1_x6a0h"]
@@ -14,7 +14,6 @@
 [ext_resource type="FontFile" uid="uid://jvioeod3wvrd" path="res://Fonts/GravityRegular5.ttf" id="9_fuppl"]
 [ext_resource type="PackedScene" uid="uid://c1n02j7a0qt7y" path="res://Scenes/Levels/TrashyLevel.tscn" id="10_k8esl"]
 [ext_resource type="Theme" uid="uid://b7ixdh8fqowrp" path="res://PopUpTheme.tres" id="12_1ueal"]
-[ext_resource type="Script" path="res://Scenes/DebugWindow.cs" id="15_s0pvr"]
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_h4eep"]
 
@@ -721,15 +720,6 @@ text = "I understand the risks"
 [node name="Button2" type="Button" parent="CanvasLayer/MarginContainer/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer"]
 layout_mode = 2
 text = "The risks have been understood"
-
-[node name="Window" type="Window" parent="."]
-position = Vector2i(0, 36)
-size = Vector2i(400, 1000)
-script = ExtResource("15_s0pvr")
-
-[node name="Camera2D" type="Camera2D" parent="Window"]
-position = Vector2(523, -1740)
-zoom = Vector2(0.4, 0.4)
 
 [connection signal="pressed" from="CanvasLayer/MarginContainer/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/Button" to="CanvasLayer/MarginContainer" method="hide"]
 [connection signal="pressed" from="CanvasLayer/MarginContainer/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/Button2" to="CanvasLayer/MarginContainer" method="hide"]
