@@ -24,8 +24,9 @@ public partial class Game : Node
     private Stack<Level> LoadedLevels = new Stack<Level>();
     private void AddLevel()
     {
-        GD.Print("adding level");
         Level currentLevel = Levels[(int)(GD.Randi() % Levels.Count)].Instantiate<Level>();
+
+        GD.Print("AddLevel start ", currentLevelNumber," " ,  currentLevel.Name);
 
         currentLevel.TriggerArea.BodyEntered += OnNextLevelTrigger;
 
@@ -35,13 +36,15 @@ public partial class Game : Node
         LevelsContainer.CallDeferred(MethodName.AddChild, currentLevel);
 
         currentLevelNumber++;
+        GD.Print("AddLevel end ", currentLevelNumber, " ", currentLevel.Name);
+
     }
 
     private void OnNextLevelTrigger(Node2D body)
     {
         if (body is Player)
         {
-            GD.Print("next level trigger");
+            GD.Print("Next Trigger");
 
             Level currentLevel = LoadedLevels.Peek();
             currentLevel.TriggerArea.BodyEntered -= OnNextLevelTrigger;
@@ -55,7 +58,7 @@ public partial class Game : Node
     {
         if (body is Player)
         {
-            GD.Print("previous level trigger");
+            GD.Print("Previous Trigger Start ", currentLevelNumber);
 
             Level toUnload = LoadedLevels.Pop();
             LevelsContainer.CallDeferred(MethodName.RemoveChild, toUnload);
@@ -65,6 +68,8 @@ public partial class Game : Node
             currentLevel.TriggerArea.BodyEntered -= OnPreviousLevelTrigger;
             currentLevel.TriggerArea.BodyEntered += OnNextLevelTrigger;
             currentLevelNumber--;
+
+            GD.Print("Previous Trigger End ", currentLevelNumber);
         }
     }
 }

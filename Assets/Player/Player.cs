@@ -14,6 +14,9 @@ public partial class Player : RigidBody2D
     [Export]
     Label DistanceFallen;
 
+    [Export]
+    AudioStreamPlayer Music;
+
     [ExportGroup("Animation")]
     [Export]
     AnimatedSprite2D Sprite;
@@ -74,6 +77,10 @@ public partial class Player : RigidBody2D
             else if (Animation.AssignedAnimation == "fall" && GroundRayCast.IsColliding())
             {
                 Land();
+            } 
+            else if (Animation.AssignedAnimation == "sit" && Input.GetActionStrength("sit") != 1)
+            {
+                Idle();
             }
         }
 
@@ -94,7 +101,10 @@ public partial class Player : RigidBody2D
         {
             JumpSquat();
         }
-        else if (@event.IsActionPressed("pause"))
+        if (@event.IsAction("sit") && IsActionable) {
+            Sit();
+        }
+        if (@event.IsActionPressed("pause"))
         {
             DebugLabel.Visible = !DebugLabel.Visible;
         }
@@ -144,16 +154,26 @@ public partial class Player : RigidBody2D
         }
     }
 
+    void Sit()
+    {
+        Animation.Play("sit");
+    }
+
     void Idle()
     {
         Animation.Play("idle");
     }
 
+    void ToggleMusic()
+    {
+        Music.StreamPaused = !Music.StreamPaused;
+    }
+
     bool IsActionable
-    { get { return GroundRayCast.IsColliding() && !new List<string>() { "jump", "fall", "land", "splat" }.Contains(Sprite.Animation); } }
+    { get { return GroundRayCast.IsColliding() && !new List<string>() { "jump", "fall", "land", "splat", "sit" }.Contains(Sprite.Animation); } }
 
     bool CanFall
-    { get { return !new List<string>() { "fall", "land", "splat" }.Contains(Sprite.Animation); } }
+    { get { return !new List<string>() { "fall", "land", "splat", "sit" }.Contains(Sprite.Animation); } }
 
     private bool _lockWalkState = false;
 

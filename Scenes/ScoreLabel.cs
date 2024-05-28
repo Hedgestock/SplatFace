@@ -10,6 +10,8 @@ public partial class ScoreLabel : Label
     {
         base._Ready();
 
+        OnScoreChanged();
+
         Score.ScoreChanged += OnScoreChanged;
     }
 

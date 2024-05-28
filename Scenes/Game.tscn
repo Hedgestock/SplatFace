@@ -670,7 +670,7 @@ text = "Safall"
 [node name="Levels" type="Node" parent="."]
 
 [node name="Player" parent="." instance=ExtResource("3_w2er8")]
-position = Vector2(220, -898)
+position = Vector2(97, -30)
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 

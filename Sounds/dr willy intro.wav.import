@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://clo6frq3qtgdm"
+path="res://.godot/imported/dr willy intro.wav-194c04bef08402dbd50454a0aaf68c6a.sample"
+
+[deps]
+
+source_file="res://Sounds/dr willy intro.wav"
+dest_files=["res://.godot/imported/dr willy intro.wav-194c04bef08402dbd50454a0aaf68c6a.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=0
