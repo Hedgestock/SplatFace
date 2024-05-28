@@ -14,6 +14,9 @@ public partial class Game : Node
     [Export]
     private Player Player;
 
+    [Export]
+    private PackedScene DebugCamera;
+
     public override void _Ready()
     {
         base._Ready();
@@ -26,9 +29,10 @@ public partial class Game : Node
     {
         Level currentLevel = Levels[(int)(GD.Randi() % Levels.Count)].Instantiate<Level>();
 
-        GD.Print("AddLevel start ", currentLevelNumber," " ,  currentLevel.Name);
+        GD.Print("AddLevel start ", currentLevelNumber, " ", currentLevel.Name);
 
-        currentLevel.TriggerArea.BodyEntered += OnNextLevelTrigger;
+        currentLevel.TriggerArea.BodyEntered += OnLevelEntered;
+        currentLevel.TriggerArea.BodyExited += OnLevelExited;
 
         currentLevel.Position = new Vector2(0, -1024 - (512 * currentLevelNumber));
 
@@ -40,36 +44,33 @@ public partial class Game : Node
 
     }
 
-    private void OnNextLevelTrigger(Node2D body)
+    private void OnLevelEntered(Node2D body)
     {
         if (body is Player)
         {
             GD.Print("Next Trigger");
 
             Level currentLevel = LoadedLevels.Peek();
-            currentLevel.TriggerArea.BodyEntered -= OnNextLevelTrigger;
-            currentLevel.TriggerArea.BodyEntered += OnPreviousLevelTrigger;
+            currentLevel.TriggerArea.BodyEntered -= OnLevelEntered;
+
             AddLevel();
         }
     }
 
-
-    private void OnPreviousLevelTrigger(Node2D body)
+    private void OnLevelExited(Node2D body)
     {
-        if (body is Player)
+        if (body is Player && body.GlobalPosition.Y > -256 - (512 * currentLevelNumber))
         {
-            GD.Print("Previous Trigger Start ", currentLevelNumber);
+            GD.Print("Previous Trigger Start ", currentLevelNumber, " player height ", body.GlobalPosition.Y, " ", -768 - (512 * currentLevelNumber));
 
             Level toUnload = LoadedLevels.Pop();
             LevelsContainer.CallDeferred(MethodName.RemoveChild, toUnload);
 
             Level currentLevel = LoadedLevels.Peek();
 
-            currentLevel.TriggerArea.BodyEntered -= OnPreviousLevelTrigger;
-            currentLevel.TriggerArea.BodyEntered += OnNextLevelTrigger;
+            currentLevel.TriggerArea.BodyEntered += OnLevelEntered;
             currentLevelNumber--;
 
-            GD.Print("Previous Trigger End ", currentLevelNumber);
         }
     }
 }
