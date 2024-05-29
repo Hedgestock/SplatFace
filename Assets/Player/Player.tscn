@@ -351,13 +351,13 @@ _data = {
 "walk": SubResource("Animation_3dedj")
 }
 
-[node name="Player" type="RigidBody2D" node_paths=PackedStringArray("DistanceFallen", "Music", "Sprite", "Animation", "GroundRayCast", "RightRayCast", "LeftRayCast", "DebugLabel", "DebugWindow")]
+[node name="Player" type="RigidBody2D" node_paths=PackedStringArray("DistanceFallenLabel", "Music", "Sprite", "Animation", "GroundRayCast", "RightRayCast", "LeftRayCast", "DebugLabel", "DebugWindow")]
 physics_material_override = SubResource("PhysicsMaterial_grlpi")
 lock_rotation = true
 continuous_cd = 1
 script = ExtResource("1_6hho7")
 Score = ExtResource("2_ii7qn")
-DistanceFallen = NodePath("DistanceFallen")
+DistanceFallenLabel = NodePath("DistanceFallen")
 Music = NodePath("AudioStreamPlayer")
 Sprite = NodePath("AnimatedSprite2D")
 Animation = NodePath("AnimationPlayer")

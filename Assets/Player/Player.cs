@@ -12,7 +12,7 @@ public partial class Player : RigidBody2D
     private ScoreSourceOfTruth Score;
 
     [Export]
-    Label DistanceFallen;
+    Label DistanceFallenLabel;
 
     [Export]
     AudioStreamPlayer Music;
@@ -76,10 +76,10 @@ public partial class Player : RigidBody2D
             {
                 Fall();
             }
-            else if (Animation.AssignedAnimation == "fall" && GroundRayCast.IsColliding())
+            else if (Animation.AssignedAnimation == "fall" && !ShouldRagdoll)
             {
                 Land();
-            } 
+            }
             else if (Animation.AssignedAnimation == "sit" && Input.GetActionStrength("sit") != 1)
             {
                 Idle();
@@ -88,7 +88,7 @@ public partial class Player : RigidBody2D
 
         if (ShouldRagdoll) { PhysicsMaterialOverride = RagdollPhysics; }
         else { PhysicsMaterialOverride = ControlledPhysics; }
-
+        GD.Print(GroundRayCast.GetCollisionNormal(), GroundRayCast.GetCollisionNormal() == Vector2.Up, GroundRayCast.IsColliding());
         DebugLabel.Text = $"{Animation.AssignedAnimation} - {Sprite.Animation}\ngrounded: {GroundRayCast.IsColliding()}\nactionable: {IsActionable}\n{LinearVelocity.Y:0.0}";
     }
 
@@ -103,7 +103,8 @@ public partial class Player : RigidBody2D
         {
             JumpSquat();
         }
-        if (@event.IsAction("sit") && IsActionable) {
+        if (@event.IsAction("sit") && IsActionable)
+        {
             Sit();
         }
         if (@event.IsActionPressed("pause"))
@@ -127,26 +128,26 @@ public partial class Player : RigidBody2D
 
         _lockWalkState = false;
         Sprite.Play("jump");
-        DistanceFallen.Hide();
+        DistanceFallenLabel.Hide();
         LinearVelocity = new Vector2(LinearVelocity.X, -500);
     }
 
     void Fall()
     {
+        _lockWalkState = false;
         FallingHeight = Position.Y;
         Animation.Play("fall");
-        DistanceFallen.Hide();
+        DistanceFallenLabel.Hide();
     }
 
     void Land()
     {
-        double distanceFallen = Math.Abs(FallingHeight - Position.Y) / 15;
-        if (distanceFallen > 10)
+        if (DistanceFallen > 10)
         {
-            DistanceFallen.Show();
-            DistanceFallen.Text = $"{distanceFallen:0.00} m";
+            DistanceFallenLabel.Show();
+            DistanceFallenLabel.Text = $"{DistanceFallen:0.00} m";
 
-            Score.Score = distanceFallen;
+            Score.Score = DistanceFallen;
 
             Animation.Play("splat");
         }
@@ -183,5 +184,14 @@ public partial class Player : RigidBody2D
     { get { return Input.IsActionPressed("walk") || Sprite.Animation == "walk" || _lockWalkState; } }
 
     bool ShouldRagdoll
-    { get { return !GroundRayCast.IsColliding() || Sprite.Animation == "jump"; } }
+    {
+        get
+        {
+            return !GroundRayCast.IsColliding() || Sprite.Animation == "jump" ||
+                (Sprite.Animation == "fall" && GroundRayCast.GetCollisionNormal() != Vector2.Up && DistanceFallen > 10);
+        }
+    }
+
+    float DistanceFallen
+    { get { return Math.Abs(FallingHeight - Position.Y) / 15; } }
 }

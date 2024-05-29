@@ -6,6 +6,9 @@
 [ext_resource type="Script" path="res://Scenes/ScoreLabel.cs" id="4_obynt"]
 [ext_resource type="Resource" uid="uid://dtvx5wogt0yb6" path="res://Assets/Score/Score.tres" id="5_jbi7k"]
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_wqav5"]
+size = Vector2(1024, 416)
+
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_5kspo"]
 size = Vector2(160, 4)
 
@@ -33,12 +36,15 @@ size = Vector2(256, 48)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ck58y"]
 size = Vector2(256, 48)
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_wqav5"]
-size = Vector2(1024, 416)
-
 [node name="ResidentialLevel" type="Node2D" node_paths=PackedStringArray("TriggerArea")]
 script = ExtResource("1_rj4ns")
 TriggerArea = NodePath("Area2D")
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(512, -256)
+shape = SubResource("RectangleShape2D_wqav5")
 
 [node name="Platform" type="TileMap" parent="."]
 tile_set = ExtResource("2_boeex")
@@ -125,9 +131,3 @@ offset_bottom = -292.0
 theme = ExtResource("3_py8ln")
 text = "\"�\"�-�-�@�A�G"
 scroll_active = false
-
-[node name="Area2D" type="Area2D" parent="."]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
-position = Vector2(512, -256)
-shape = SubResource("RectangleShape2D_wqav5")
