@@ -1,5 +1,6 @@
 [gd_resource type="PhysicsMaterial" format=3 uid="uid://bwit6m5lwgh5d"]
 
 [resource]
+resource_name = "RagdollPhysics"
 friction = 0.0
 bounce = 2.0

@@ -26,15 +26,14 @@ public partial class Player : RigidBody2D
     [ExportGroup("Physics")]
     [Export]
     RayCast2D GroundRayCast;
-    [Export]
-    RayCast2D RightRayCast;
-    [Export]
-    RayCast2D LeftRayCast;
+
 
     [Export]
     PhysicsMaterial ControlledPhysics;
     [Export]
     PhysicsMaterial RagdollPhysics;
+    [Export]
+    PhysicsMaterial LandingPhysics;
 
     [ExportGroup("Debug")]
     [Export]
@@ -57,7 +56,8 @@ public partial class Player : RigidBody2D
             if (IsWalking)
                 direction = (float)Mathf.Clamp(direction, -0.49, 0.49);
 
-            LinearVelocity = new Vector2((float)(direction * Speed), LinearVelocity.Y);
+            LinearVelocity = new Vector2((float)(direction * Speed),
+                GroundRayCast.GetCollisionNormal() != Vector2.Up ? LinearVelocity.Y : 0);
             if (Animation.AssignedAnimation != "jump")
             {
                 if (direction == 0) Animation.Play("idle");
@@ -86,10 +86,11 @@ public partial class Player : RigidBody2D
             }
         }
 
-        if (ShouldRagdoll) { PhysicsMaterialOverride = RagdollPhysics; }
-        else { PhysicsMaterialOverride = ControlledPhysics; }
-        GD.Print(GroundRayCast.GetCollisionNormal(), GroundRayCast.GetCollisionNormal() == Vector2.Up, GroundRayCast.IsColliding());
-        DebugLabel.Text = $"{Animation.AssignedAnimation} - {Sprite.Animation}\ngrounded: {GroundRayCast.IsColliding()}\nactionable: {IsActionable}\n{LinearVelocity.Y:0.0}";
+        PhysicsMaterialOverride = CurrentPhysics;
+
+        GD.Print();
+
+        DebugLabel.Text = $"{CurrentPhysics.ResourceName}\n{Animation.AssignedAnimation} - {Sprite.Animation}\ngrounded: {GroundRayCast.IsColliding()}\nactionable: {IsActionable}\n{LinearVelocity.Y:0.0}";
     }
 
     public override void _IntegrateForces(PhysicsDirectBodyState2D state)
@@ -182,7 +183,6 @@ public partial class Player : RigidBody2D
 
     bool IsWalking
     { get { return Input.IsActionPressed("walk") || Sprite.Animation == "walk" || _lockWalkState; } }
-
     bool ShouldRagdoll
     {
         get
@@ -194,4 +194,17 @@ public partial class Player : RigidBody2D
 
     float DistanceFallen
     { get { return Math.Abs(FallingHeight - Position.Y) / 15; } }
+
+
+    PhysicsMaterial CurrentPhysics
+    {
+        get
+        {
+            if (ShouldRagdoll)
+                return RagdollPhysics;
+            if (new List<string>() { "land", "splat", "sit" }.Contains(Sprite.Animation) || Input.GetAxis("move_left", "move_right") == 0)
+                return LandingPhysics;
+            return ControlledPhysics;
+        }
+    }
 }

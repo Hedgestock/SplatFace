@@ -6,14 +6,13 @@
 [ext_resource type="PhysicsMaterial" uid="uid://c58a8xbvj0w0y" path="res://Assets/Player/PlayerControlledPhysics.tres" id="1_f8gyt"]
 [ext_resource type="Resource" uid="uid://dtvx5wogt0yb6" path="res://Assets/Score/Score.tres" id="2_ii7qn"]
 [ext_resource type="FontFile" uid="uid://jvioeod3wvrd" path="res://Fonts/GravityRegular5.ttf" id="5_562yd"]
+[ext_resource type="PhysicsMaterial" uid="uid://obvt3x7jsug7" path="res://Assets/Player/PlayerLandingPhysics.tres" id="5_ab664"]
 [ext_resource type="AudioStream" uid="uid://bi0slg1spn3ao" path="res://Sounds/running-1-6846.mp3" id="7_ift0q"]
 [ext_resource type="Script" path="res://Assets/Player/PlayerSounds.cs" id="7_k2axt"]
 [ext_resource type="AudioStream" uid="uid://cpc2yv38m4la3" path="res://Sounds/Splat.mp3" id="9_xt07s"]
 [ext_resource type="AudioStream" uid="uid://dbtotl0xhrli" path="res://Sounds/land.mp3" id="10_is2w7"]
 [ext_resource type="AudioStream" uid="uid://iwllrm36ep6b" path="res://Sounds/dr willy full.wav" id="11_d4vsm"]
 [ext_resource type="Script" path="res://Scenes/DebugWindow.cs" id="12_xmbd5"]
-
-[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_grlpi"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_5p7l5"]
 radius = 4.0
@@ -351,8 +350,8 @@ _data = {
 "walk": SubResource("Animation_3dedj")
 }
 
-[node name="Player" type="RigidBody2D" node_paths=PackedStringArray("DistanceFallenLabel", "Music", "Sprite", "Animation", "GroundRayCast", "RightRayCast", "LeftRayCast", "DebugLabel", "DebugWindow")]
-physics_material_override = SubResource("PhysicsMaterial_grlpi")
+[node name="Player" type="RigidBody2D" node_paths=PackedStringArray("DistanceFallenLabel", "Music", "Sprite", "Animation", "GroundRayCast", "DebugLabel", "DebugWindow")]
+physics_material_override = ExtResource("1_f8gyt")
 lock_rotation = true
 continuous_cd = 1
 script = ExtResource("1_6hho7")
@@ -362,10 +361,9 @@ Music = NodePath("AudioStreamPlayer")
 Sprite = NodePath("AnimatedSprite2D")
 Animation = NodePath("AnimationPlayer")
 GroundRayCast = NodePath("GroundCheck")
-RightRayCast = NodePath("RightWallCheck")
-LeftRayCast = NodePath("LeftWallCheck2")
 ControlledPhysics = ExtResource("1_f8gyt")
 RagdollPhysics = ExtResource("1_2gtoc")
+LandingPhysics = ExtResource("5_ab664")
 DebugLabel = NodePath("Window/CanvasLayer/Debug")
 DebugWindow = NodePath("Window")
 
@@ -377,16 +375,6 @@ autoplay = "idle"
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, 4)
 shape = SubResource("CapsuleShape2D_5p7l5")
-
-[node name="RightWallCheck" type="RayCast2D" parent="."]
-visible = false
-position = Vector2(0, 12)
-target_position = Vector2(8, 0)
-
-[node name="LeftWallCheck2" type="RayCast2D" parent="."]
-visible = false
-position = Vector2(0, 12)
-target_position = Vector2(-8, 0)
 
 [node name="GroundCheck" type="RayCast2D" parent="."]
 position = Vector2(0, 11)

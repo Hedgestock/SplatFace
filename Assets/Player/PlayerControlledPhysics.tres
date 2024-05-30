@@ -1,4 +1,6 @@
 [gd_resource type="PhysicsMaterial" format=3 uid="uid://c58a8xbvj0w0y"]
 
 [resource]
+resource_name = "ControlledPhysics"
+friction = 0.0
 absorbent = true

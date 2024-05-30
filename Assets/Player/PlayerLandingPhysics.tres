@@ -1,0 +1,5 @@
+[gd_resource type="PhysicsMaterial" format=3 uid="uid://obvt3x7jsug7"]
+
+[resource]
+resource_name = "LandingPhysics"
+absorbent = true

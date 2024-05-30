@@ -4,6 +4,6 @@
 - [x] Make score a resource
 - [x] Make levels despawn on fall
 - [x] Fix the bad level loading when previous is not triggered
-- [ ] Fix jumpsquatting off a ledge locking the walk state
+- [x] Fix jumpsquatting off a ledge locking the walk state
 - [ ] Save score
-- [ ] Fix the splatting on slants
+- [x] Fix the splatting on slants
