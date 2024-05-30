@@ -118,7 +118,7 @@ public partial class Player : RigidBody2D
     {
         if (IsActionable)
         {
-            if (IsWalking) _lockWalkState = true;
+            if (IsWalking || LinearVelocity.X == 0) _lockWalkState = true;
             Animation.Play("jump");
         }
     }

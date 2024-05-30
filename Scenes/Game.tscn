@@ -1,4 +1,4 @@
-[gd_scene load_steps=34 format=3 uid="uid://4vdsghonlo2d"]
+[gd_scene load_steps=35 format=3 uid="uid://4vdsghonlo2d"]
 
 [ext_resource type="TileSet" uid="uid://bkawqph4bvxg0" path="res://Assets/TileSets/BackgroundTileSet.tres" id="1_guc81"]
 [ext_resource type="Script" path="res://Scenes/Game.cs" id="1_x6a0h"]
@@ -9,6 +9,7 @@
 [ext_resource type="Texture2D" uid="uid://bcda4hjb3c7v4" path="res://Art/Background/Frontal Fog.png" id="3_krrpx"]
 [ext_resource type="PackedScene" uid="uid://cdb8ascv60w6m" path="res://Assets/Player/Player.tscn" id="3_w2er8"]
 [ext_resource type="PackedScene" uid="uid://bcsxccslbicjl" path="res://Scenes/Levels/EmptyLevel.tscn" id="4_0fje5"]
+[ext_resource type="PackedScene" uid="uid://beduf0w71x15y" path="res://Scenes/Levels/FactoryLevel.tscn" id="5_ar2eq"]
 [ext_resource type="Script" path="res://Scenes/ScoreLabel.cs" id="7_o4bgb"]
 [ext_resource type="Resource" uid="uid://dtvx5wogt0yb6" path="res://Assets/Score/Score.tres" id="8_sj54b"]
 [ext_resource type="FontFile" uid="uid://jvioeod3wvrd" path="res://Fonts/GravityRegular5.ttf" id="9_fuppl"]
@@ -73,7 +74,7 @@ normal = Vector2(-1, 0)
 
 [node name="Game" type="Node" node_paths=PackedStringArray("LevelsContainer", "Player")]
 script = ExtResource("1_x6a0h")
-Levels = Array[PackedScene]([ExtResource("10_k8esl"), ExtResource("3_fswu5"), ExtResource("4_0fje5")])
+Levels = Array[PackedScene]([ExtResource("10_k8esl"), ExtResource("3_fswu5"), ExtResource("4_0fje5"), ExtResource("5_ar2eq")])
 LevelsContainer = NodePath("Levels")
 Player = NodePath("Player")
 
