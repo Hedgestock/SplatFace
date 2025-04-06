@@ -48,6 +48,8 @@ public partial class Player : RigidBody2D
 
         GroundRayCast.TargetPosition = new Vector2(0, (float)Mathf.Max(LinearVelocity.Y * 2 * delta, 5));
 
+        GD.Print($"{Animation.AssignedAnimation} {IsActionable} ");
+
         if (IsActionable)
         {
             float direction = Input.GetAxis("move_left", "move_right");
@@ -97,15 +99,15 @@ public partial class Player : RigidBody2D
 
     public override void _Input(InputEvent @event)
     {
-        if (@event.IsActionPressed("jump"))
+        if (@event.IsActionPressed("jump") && IsActionable)
         {
             JumpSquat();
         }
-        if (@event.IsAction("sit") && IsActionable)
+        else if (@event.IsAction("sit") && IsActionable)
         {
             Sit();
         }
-        if (@event.IsActionPressed("pause"))
+        else if (@event.IsActionPressed("pause"))
         {
             DebugWindow.Visible = !DebugWindow.Visible;
         }
@@ -113,11 +115,8 @@ public partial class Player : RigidBody2D
 
     void JumpSquat()
     {
-        if (IsActionable)
-        {
-            if (IsWalking || LinearVelocity.X == 0) _lockWalkState = true;
-            Animation.Play("jump");
-        }
+        if (IsWalking || LinearVelocity.X == 0) _lockWalkState = true;
+        Animation.Play("jump");
     }
 
     void Jump()
@@ -158,6 +157,7 @@ public partial class Player : RigidBody2D
     void Sit()
     {
         Animation.Play("sit");
+        Sprite.Play("sit");
     }
 
     void Idle()
