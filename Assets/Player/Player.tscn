@@ -8,7 +8,7 @@
 [ext_resource type="FontFile" uid="uid://jvioeod3wvrd" path="res://Fonts/GravityRegular5.ttf" id="5_562yd"]
 [ext_resource type="PhysicsMaterial" uid="uid://obvt3x7jsug7" path="res://Assets/Player/PlayerLandingPhysics.tres" id="5_ab664"]
 [ext_resource type="AudioStream" uid="uid://bi0slg1spn3ao" path="res://Sounds/running-1-6846.mp3" id="7_ift0q"]
-[ext_resource type="Script" uid="uid://dbex4b78kk80n" path="res://Assets/Player/PlayerSounds.cs" id="7_k2axt"]
+[ext_resource type="Script" uid="uid://r4rxse5uhqi5" path="res://Assets/Player/player_sfx.gd" id="8_vewtk"]
 [ext_resource type="AudioStream" uid="uid://cpc2yv38m4la3" path="res://Sounds/Splat.mp3" id="9_xt07s"]
 [ext_resource type="AudioStream" uid="uid://dbtotl0xhrli" path="res://Sounds/land.mp3" id="10_is2w7"]
 [ext_resource type="AudioStream" uid="uid://iwllrm36ep6b" path="res://Sounds/dr willy full.wav" id="11_d4vsm"]
@@ -166,7 +166,7 @@ tracks/2/keys = {
 "transitions": PackedFloat32Array(1),
 "values": [{
 "args": [],
-"method": &"Land"
+"method": &"land"
 }]
 }
 
@@ -204,7 +204,7 @@ tracks/1/keys = {
 "method": &"stop"
 }, {
 "args": [],
-"method": &"Run"
+"method": &"run"
 }]
 }
 
@@ -298,7 +298,7 @@ tracks/2/keys = {
 "transitions": PackedFloat32Array(1),
 "values": [{
 "args": [],
-"method": &"Splat"
+"method": &"splat"
 }]
 }
 
@@ -408,10 +408,10 @@ horizontal_alignment = 1
 
 [node name="PlayerSFX" type="AudioStreamPlayer2D" parent="."]
 autoplay = true
-script = ExtResource("7_k2axt")
-Running = ExtResource("7_ift0q")
-Splatting = ExtResource("9_xt07s")
-Landing = ExtResource("10_is2w7")
+script = ExtResource("8_vewtk")
+running = ExtResource("7_ift0q")
+splatting = ExtResource("9_xt07s")
+landing = ExtResource("10_is2w7")
 
 [node name="Music" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("11_d4vsm")

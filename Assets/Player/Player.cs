@@ -48,8 +48,6 @@ public partial class Player : RigidBody2D
 
         GroundRayCast.TargetPosition = new Vector2(0, (float)Mathf.Max(LinearVelocity.Y * 2 * delta, 5));
 
-        GD.Print($"{Animation.AssignedAnimation} {IsActionable} ");
-
         if (IsActionable)
         {
             float direction = Input.GetAxis("move_left", "move_right");
