@@ -1,9 +1,8 @@
-[gd_scene load_steps=18 format=3 uid="uid://bcsxccslbicjl"]
+[gd_scene load_steps=17 format=3 uid="uid://bcsxccslbicjl"]
 
-[ext_resource type="Script" path="res://Scenes/Levels/Level.cs" id="1_thiqi"]
+[ext_resource type="Script" uid="uid://ciojktndbb8r5" path="res://Scenes/Levels/Level.cs" id="1_thiqi"]
 [ext_resource type="TileSet" uid="uid://cym1xc2552p54" path="res://Assets/TileSets/MainTileSet.tres" id="2_5sgjm"]
-[ext_resource type="Theme" uid="uid://bem3ojr8yyndj" path="res://BillboardTheme.tres" id="3_u1dc5"]
-[ext_resource type="Script" path="res://Scenes/ScoreLabel.cs" id="4_gg145"]
+[ext_resource type="Script" uid="uid://hyumb6obrds4" path="res://Scenes/ScoreLabel.cs" id="4_gg145"]
 [ext_resource type="Resource" uid="uid://dtvx5wogt0yb6" path="res://Assets/Score/Score.tres" id="5_yxhxo"]
 [ext_resource type="FontFile" uid="uid://jvioeod3wvrd" path="res://Fonts/GravityRegular5.ttf" id="6_8syaf"]
 
@@ -135,8 +134,7 @@ offset_left = 597.0
 offset_top = -363.0
 offset_right = 839.0
 offset_bottom = -355.0
-theme = ExtResource("3_u1dc5")
-text = "Our product is safe for falls up to:"
+text = "safe.up.to"
 
 [node name="Score" type="Label" parent="Platform/Advert"]
 z_index = -1
@@ -145,7 +143,6 @@ layout_mode = 0
 offset_top = 12.0
 offset_right = 77.0
 offset_bottom = 20.0
-theme = ExtResource("3_u1dc5")
 text = "0 m"
 script = ExtResource("4_gg145")
 Score = ExtResource("5_yxhxo")
@@ -158,7 +155,6 @@ offset_left = 219.0
 offset_top = 17.0
 offset_right = 293.0
 offset_bottom = 30.0
-theme = ExtResource("3_u1dc5")
 theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_fonts/font = ExtResource("6_8syaf")
 theme_override_font_sizes/font_size = 5

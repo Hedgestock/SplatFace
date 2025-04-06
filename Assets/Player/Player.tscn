@@ -2,17 +2,17 @@
 
 [ext_resource type="SpriteFrames" uid="uid://cek45u8lpr1um" path="res://Assets/Player/PlayerAnimation.tres" id="1_0m1k7"]
 [ext_resource type="PhysicsMaterial" uid="uid://bwit6m5lwgh5d" path="res://Assets/Player/PlayerRagdollPhysics.tres" id="1_2gtoc"]
-[ext_resource type="Script" path="res://Assets/Player/Player.cs" id="1_6hho7"]
+[ext_resource type="Script" uid="uid://cslr6gu7b2cu" path="res://Assets/Player/Player.cs" id="1_6hho7"]
 [ext_resource type="PhysicsMaterial" uid="uid://c58a8xbvj0w0y" path="res://Assets/Player/PlayerControlledPhysics.tres" id="1_f8gyt"]
 [ext_resource type="Resource" uid="uid://dtvx5wogt0yb6" path="res://Assets/Score/Score.tres" id="2_ii7qn"]
 [ext_resource type="FontFile" uid="uid://jvioeod3wvrd" path="res://Fonts/GravityRegular5.ttf" id="5_562yd"]
 [ext_resource type="PhysicsMaterial" uid="uid://obvt3x7jsug7" path="res://Assets/Player/PlayerLandingPhysics.tres" id="5_ab664"]
 [ext_resource type="AudioStream" uid="uid://bi0slg1spn3ao" path="res://Sounds/running-1-6846.mp3" id="7_ift0q"]
-[ext_resource type="Script" path="res://Assets/Player/PlayerSounds.cs" id="7_k2axt"]
+[ext_resource type="Script" uid="uid://dbex4b78kk80n" path="res://Assets/Player/PlayerSounds.cs" id="7_k2axt"]
 [ext_resource type="AudioStream" uid="uid://cpc2yv38m4la3" path="res://Sounds/Splat.mp3" id="9_xt07s"]
 [ext_resource type="AudioStream" uid="uid://dbtotl0xhrli" path="res://Sounds/land.mp3" id="10_is2w7"]
 [ext_resource type="AudioStream" uid="uid://iwllrm36ep6b" path="res://Sounds/dr willy full.wav" id="11_d4vsm"]
-[ext_resource type="Script" path="res://Scenes/DebugWindow.cs" id="12_xmbd5"]
+[ext_resource type="Script" uid="uid://dljfp761c1xkn" path="res://Scenes/DebugWindow.cs" id="12_xmbd5"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_5p7l5"]
 radius = 4.0
@@ -340,14 +340,14 @@ tracks/1/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_112fm"]
 _data = {
-"fall": SubResource("Animation_pev06"),
-"idle": SubResource("Animation_hd3pe"),
-"jump": SubResource("Animation_qnlhk"),
-"land": SubResource("Animation_gw1oy"),
-"run": SubResource("Animation_xoc5b"),
-"sit": SubResource("Animation_mpfjq"),
-"splat": SubResource("Animation_5rjem"),
-"walk": SubResource("Animation_3dedj")
+&"fall": SubResource("Animation_pev06"),
+&"idle": SubResource("Animation_hd3pe"),
+&"jump": SubResource("Animation_qnlhk"),
+&"land": SubResource("Animation_gw1oy"),
+&"run": SubResource("Animation_xoc5b"),
+&"sit": SubResource("Animation_mpfjq"),
+&"splat": SubResource("Animation_5rjem"),
+&"walk": SubResource("Animation_3dedj")
 }
 
 [node name="Player" type="RigidBody2D" node_paths=PackedStringArray("DistanceFallenLabel", "Music", "Sprite", "Animation", "GroundRayCast", "DebugLabel", "DebugWindow")]
@@ -387,11 +387,10 @@ limit_bottom = 0
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
-"": SubResource("AnimationLibrary_112fm")
+&"": SubResource("AnimationLibrary_112fm")
 }
 
 [node name="DistanceFallen" type="Label" parent="."]
-visible = false
 z_index = 10
 z_as_relative = false
 anchors_preset = 5
@@ -437,5 +436,3 @@ offset_right = 16.0
 offset_bottom = 5.0
 size_flags_horizontal = 0
 size_flags_vertical = 0
-theme_override_fonts/font = ExtResource("5_562yd")
-theme_override_font_sizes/font_size = 20

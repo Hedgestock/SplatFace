@@ -7,3 +7,6 @@
 - [x] Fix jumpsquatting off a ledge locking the walk state
 - [ ] Save score
 - [x] Fix the splatting on slants
+- [ ] Add touchscreen support
+- [ ] Add controller support
+- [ ] Add internationalisation

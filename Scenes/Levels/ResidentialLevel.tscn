@@ -1,9 +1,8 @@
-[gd_scene load_steps=16 format=3 uid="uid://1g1143hfmdln"]
+[gd_scene load_steps=15 format=3 uid="uid://1g1143hfmdln"]
 
-[ext_resource type="Script" path="res://Scenes/Levels/Level.cs" id="1_rj4ns"]
+[ext_resource type="Script" uid="uid://ciojktndbb8r5" path="res://Scenes/Levels/Level.cs" id="1_rj4ns"]
 [ext_resource type="TileSet" uid="uid://cym1xc2552p54" path="res://Assets/TileSets/MainTileSet.tres" id="2_boeex"]
-[ext_resource type="Theme" uid="uid://bem3ojr8yyndj" path="res://BillboardTheme.tres" id="3_py8ln"]
-[ext_resource type="Script" path="res://Scenes/ScoreLabel.cs" id="4_obynt"]
+[ext_resource type="Script" uid="uid://hyumb6obrds4" path="res://Scenes/ScoreLabel.cs" id="4_obynt"]
 [ext_resource type="Resource" uid="uid://dtvx5wogt0yb6" path="res://Assets/Score/Score.tres" id="5_jbi7k"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_wqav5"]
@@ -115,7 +114,6 @@ offset_left = 626.0
 offset_top = -308.0
 offset_right = 686.0
 offset_bottom = -300.0
-theme = ExtResource("3_py8ln")
 text = "0 m"
 horizontal_alignment = 1
 script = ExtResource("4_obynt")
@@ -124,10 +122,10 @@ Score = ExtResource("5_jbi7k")
 [node name="Glitched" type="RichTextLabel" parent="Platform"]
 z_index = -1
 z_as_relative = false
-offset_left = 343.0
-offset_top = -316.0
-offset_right = 392.0
-offset_bottom = -292.0
-theme = ExtResource("3_py8ln")
+offset_left = 338.0
+offset_top = -318.0
+offset_right = 398.0
+offset_bottom = -290.0
+theme_override_font_sizes/normal_font_size = 14
 text = "\"�\"�-�-�@�A�G"
 scroll_active = false

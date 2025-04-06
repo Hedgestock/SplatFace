@@ -88,8 +88,6 @@ public partial class Player : RigidBody2D
 
         PhysicsMaterialOverride = CurrentPhysics;
 
-        GD.Print();
-
         DebugLabel.Text = $"{CurrentPhysics.ResourceName}\n{Animation.AssignedAnimation} - {Sprite.Animation}\ngrounded: {GroundRayCast.IsColliding()}\nactionable: {IsActionable}\n{LinearVelocity.Y:0.0}";
     }
 

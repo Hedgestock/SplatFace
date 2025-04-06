@@ -1,0 +1,43 @@
+keys,en,fr
+understand.risks,I understand the risks,Je comprends les risques
+risks.understand,The risks have been understood,Les risques ont été compris
+intro,"
+[center] Hello, and welcome to the [b]SAFALL[/b] implant test program.
+
+Your profile has been selected amongst the population of [b]Verticity[/b] due to your small size and weight, making it less likely for you to get hurt during the process.
+[i] (it has nothing to do with the fact that the dev needed a free sprite with a ""splat"" animation and this one was one of the few available on itch.io)[/i]
+
+Your designated job is to climb up the city to the highest level you can reach, and jump off the furthest down you can to prove the effectiveness of our newly developed implant that aims to reduce casualties and fatalities in the ever-growing vertical megalopolis.
+
+You can hold CTRL to walk, the rest should be intuitive. [b]SAFALL[/b] thanks you for your dedication and assure you that if any problem were to occur to you, no one will be held responsible.","
+[center] Bonjour, et bienvenue dans le programme de test des implants [b]SAFALL[/b].
+
+Votre profil a été sélectionné parmi la population de [b]Verticité[/b] en raison de votre faible poids et petite taille, réduisant ainsi le risque de blessure pendant le processus.
+[i] (cela n'a rien à voir avec le fait que le développeur avait besoin d'un sprite gratuit avec une animation ""face contre terre"" et que celui-ci était l'un des rares disponibles sur itch.io)[/i]
+
+Votre tâche consiste à escalader la ville jusqu'au niveau le plus élevé que vous puissiez atteindre puis de sauter le plus bas possible pour prouver l'efficacité de notre implant nouvellement développé qui vise à réduire les accidents et les décès dans cette mégalopole verticale en pleine croissance.
+
+Utilisez la touche CTRL pour marcher, le reste devrait être intuitif. [b]SAFALL[/b] vous remercie pour votre dévouement et vous assure que si un problème venait à vous arriver, personne ne sera tenu responsable."
+safe.up.to,Our product is safe for falls up to:,Notre produit fonctionne jusqu'à :
+penzilla,"
+Player sprite
+by [url=https://penzilla.itch.io/protagonist-character]Penzilla[/url]","
+Personnage
+par [url=https://penzilla.itch.io/protagonist-character]Penzilla[/url]"
+anokolisa,"
+Level tileset
+by [url=https://anokolisa.itch.io/sidescroller-shooter-central-city]Anokolisa[/url]","
+Visuels niveau
+par [url=https://anokolisa.itch.io/sidescroller-shooter-central-city]Anokolisa[/url]"
+jotson,"
+Font
+by [url=https://jotson.itch.io/gravity-pixel-font]jotson[/url]
+","
+Police
+par [url=https://jotson.itch.io/gravity-pixel-font]jotson[/url]
+"
+hedgestock,"
+Gameplay by
+[url=https://github.com/hedgestock]Hedgestock[/url]","
+Gameplay
+[url=https://github.com/hedgestock]Hedgestock[/url]"
