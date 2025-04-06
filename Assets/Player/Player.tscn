@@ -1,10 +1,9 @@
-[gd_scene load_steps=24 format=3 uid="uid://cdb8ascv60w6m"]
+[gd_scene load_steps=23 format=3 uid="uid://cdb8ascv60w6m"]
 
 [ext_resource type="SpriteFrames" uid="uid://cek45u8lpr1um" path="res://Assets/Player/PlayerAnimation.tres" id="1_0m1k7"]
 [ext_resource type="PhysicsMaterial" uid="uid://bwit6m5lwgh5d" path="res://Assets/Player/PlayerRagdollPhysics.tres" id="1_2gtoc"]
 [ext_resource type="Script" uid="uid://cslr6gu7b2cu" path="res://Assets/Player/Player.cs" id="1_6hho7"]
 [ext_resource type="PhysicsMaterial" uid="uid://c58a8xbvj0w0y" path="res://Assets/Player/PlayerControlledPhysics.tres" id="1_f8gyt"]
-[ext_resource type="Resource" uid="uid://dtvx5wogt0yb6" path="res://Assets/Score/Score.tres" id="2_ii7qn"]
 [ext_resource type="FontFile" uid="uid://jvioeod3wvrd" path="res://Fonts/GravityRegular5.ttf" id="5_562yd"]
 [ext_resource type="PhysicsMaterial" uid="uid://obvt3x7jsug7" path="res://Assets/Player/PlayerLandingPhysics.tres" id="5_ab664"]
 [ext_resource type="AudioStream" uid="uid://bi0slg1spn3ao" path="res://Sounds/running-1-6846.mp3" id="7_ift0q"]
@@ -355,7 +354,6 @@ physics_material_override = ExtResource("1_f8gyt")
 lock_rotation = true
 continuous_cd = 1
 script = ExtResource("1_6hho7")
-Score = ExtResource("2_ii7qn")
 DistanceFallenLabel = NodePath("DistanceFallen")
 Music = NodePath("Music")
 Sprite = NodePath("AnimatedSprite2D")

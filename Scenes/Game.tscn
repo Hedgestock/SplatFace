@@ -1,4 +1,4 @@
-[gd_scene load_steps=37 format=3 uid="uid://4vdsghonlo2d"]
+[gd_scene load_steps=36 format=3 uid="uid://4vdsghonlo2d"]
 
 [ext_resource type="TileSet" uid="uid://bkawqph4bvxg0" path="res://Assets/TileSets/BackgroundTileSet.tres" id="1_guc81"]
 [ext_resource type="Script" uid="uid://bkfwui4mca55y" path="res://Scenes/Game.cs" id="1_x6a0h"]
@@ -9,10 +9,9 @@
 [ext_resource type="PackedScene" uid="uid://cdb8ascv60w6m" path="res://Assets/Player/Player.tscn" id="3_w2er8"]
 [ext_resource type="PackedScene" uid="uid://bcsxccslbicjl" path="res://Scenes/Levels/EmptyLevel.tscn" id="4_0fje5"]
 [ext_resource type="PackedScene" uid="uid://beduf0w71x15y" path="res://Scenes/Levels/FactoryLevel.tscn" id="5_ar2eq"]
-[ext_resource type="Script" uid="uid://hyumb6obrds4" path="res://Scenes/ScoreLabel.cs" id="7_o4bgb"]
-[ext_resource type="Resource" uid="uid://dtvx5wogt0yb6" path="res://Assets/Score/Score.tres" id="8_sj54b"]
 [ext_resource type="FontFile" uid="uid://jvioeod3wvrd" path="res://Fonts/GravityRegular5.ttf" id="9_fuppl"]
 [ext_resource type="FontVariation" uid="uid://cn7bs3lvotdog" path="res://Fonts/BillboardFont.tres" id="10_acvyw"]
+[ext_resource type="Script" uid="uid://md68mpkvkcyr" path="res://Scenes/score_label.gd" id="10_alh3a"]
 [ext_resource type="PackedScene" uid="uid://c1n02j7a0qt7y" path="res://Scenes/Levels/TrashyLevel.tscn" id="10_k8esl"]
 [ext_resource type="FontFile" uid="uid://ur6apffbvx6v" path="res://Fonts/GravityBold8.ttf" id="12_acvyw"]
 
@@ -353,8 +352,7 @@ offset_right = 686.0
 offset_bottom = -300.0
 text = "0 m"
 horizontal_alignment = 1
-script = ExtResource("7_o4bgb")
-Score = ExtResource("8_sj54b")
+script = ExtResource("10_alh3a")
 
 [node name="Advertical" type="Node2D" parent="Platform"]
 position = Vector2(114, -334)
@@ -651,8 +649,7 @@ offset_top = 12.0
 offset_right = 77.0
 offset_bottom = 20.0
 text = "0 m"
-script = ExtResource("7_o4bgb")
-Score = ExtResource("8_sj54b")
+script = ExtResource("10_alh3a")
 
 [node name="Brand" type="Label" parent="Platform/Advert"]
 z_index = -1
@@ -671,7 +668,7 @@ text = "Safall"
 [node name="Levels" type="Node" parent="."]
 
 [node name="Player" parent="." instance=ExtResource("3_w2er8")]
-position = Vector2(95, -28)
+position = Vector2(202, -1036)
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 

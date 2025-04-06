@@ -1,9 +1,8 @@
-[gd_scene load_steps=17 format=3 uid="uid://bcsxccslbicjl"]
+[gd_scene load_steps=16 format=3 uid="uid://bcsxccslbicjl"]
 
 [ext_resource type="Script" uid="uid://ciojktndbb8r5" path="res://Scenes/Levels/Level.cs" id="1_thiqi"]
 [ext_resource type="TileSet" uid="uid://cym1xc2552p54" path="res://Assets/TileSets/MainTileSet.tres" id="2_5sgjm"]
-[ext_resource type="Script" uid="uid://hyumb6obrds4" path="res://Scenes/ScoreLabel.cs" id="4_gg145"]
-[ext_resource type="Resource" uid="uid://dtvx5wogt0yb6" path="res://Assets/Score/Score.tres" id="5_yxhxo"]
+[ext_resource type="Script" uid="uid://md68mpkvkcyr" path="res://Scenes/score_label.gd" id="3_8x0y0"]
 [ext_resource type="FontFile" uid="uid://jvioeod3wvrd" path="res://Fonts/GravityRegular5.ttf" id="6_8syaf"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_27j3i"]
@@ -144,8 +143,7 @@ offset_top = 12.0
 offset_right = 77.0
 offset_bottom = 20.0
 text = "0 m"
-script = ExtResource("4_gg145")
-Score = ExtResource("5_yxhxo")
+script = ExtResource("3_8x0y0")
 
 [node name="Brand" type="Label" parent="Platform/Advert"]
 z_index = -1

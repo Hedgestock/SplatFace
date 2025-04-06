@@ -1,7 +1,0 @@
-[gd_resource type="Resource" script_class="ScoreSourceOfTruth" load_steps=2 format=3 uid="uid://dtvx5wogt0yb6"]
-
-[ext_resource type="Script" uid="uid://ctos3f0wxnk6u" path="res://Assets/Score/ScoreSourceOfTruth.cs" id="1_noeyf"]
-
-[resource]
-script = ExtResource("1_noeyf")
-Score = 0.0

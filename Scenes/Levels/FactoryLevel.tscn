@@ -1,9 +1,8 @@
-[gd_scene load_steps=21 format=3 uid="uid://beduf0w71x15y"]
+[gd_scene load_steps=20 format=3 uid="uid://beduf0w71x15y"]
 
 [ext_resource type="Script" uid="uid://ciojktndbb8r5" path="res://Scenes/Levels/Level.cs" id="1_cq16p"]
 [ext_resource type="TileSet" uid="uid://cym1xc2552p54" path="res://Assets/TileSets/MainTileSet.tres" id="2_dd8fp"]
-[ext_resource type="Script" uid="uid://hyumb6obrds4" path="res://Scenes/ScoreLabel.cs" id="4_l407q"]
-[ext_resource type="Resource" uid="uid://dtvx5wogt0yb6" path="res://Assets/Score/Score.tres" id="5_1mhl6"]
+[ext_resource type="Script" uid="uid://md68mpkvkcyr" path="res://Scenes/score_label.gd" id="3_nrc24"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_27j3i"]
 size = Vector2(1024, 416)
@@ -171,5 +170,4 @@ offset_right = 990.0
 offset_bottom = -173.0
 text = "0 m"
 horizontal_alignment = 1
-script = ExtResource("4_l407q")
-Score = ExtResource("5_1mhl6")
+script = ExtResource("3_nrc24")

@@ -8,7 +8,7 @@ public partial class Player : RigidBody2D
     int Speed = 200;
 
     [Export]
-    private ScoreSourceOfTruth Score;
+    private Resource Score;
 
     [Export]
     Label DistanceFallenLabel;
@@ -142,7 +142,10 @@ public partial class Player : RigidBody2D
             DistanceFallenLabel.Show();
             DistanceFallenLabel.Text = $"{DistanceFallen:0.00} m";
 
-            Score.Score = DistanceFallen;
+            //(Score)Score.Score = DistanceFallen;
+            var global = GetNode<Node>("/root/ScoreSourceOfTruth");
+            global.Set("score", DistanceFallen);
+
 
             Animation.Play("splat");
         }

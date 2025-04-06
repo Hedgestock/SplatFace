@@ -1,9 +1,8 @@
-[gd_scene load_steps=15 format=3 uid="uid://1g1143hfmdln"]
+[gd_scene load_steps=14 format=3 uid="uid://1g1143hfmdln"]
 
 [ext_resource type="Script" uid="uid://ciojktndbb8r5" path="res://Scenes/Levels/Level.cs" id="1_rj4ns"]
 [ext_resource type="TileSet" uid="uid://cym1xc2552p54" path="res://Assets/TileSets/MainTileSet.tres" id="2_boeex"]
-[ext_resource type="Script" uid="uid://hyumb6obrds4" path="res://Scenes/ScoreLabel.cs" id="4_obynt"]
-[ext_resource type="Resource" uid="uid://dtvx5wogt0yb6" path="res://Assets/Score/Score.tres" id="5_jbi7k"]
+[ext_resource type="Script" uid="uid://md68mpkvkcyr" path="res://Scenes/score_label.gd" id="3_j5anb"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_wqav5"]
 size = Vector2(1024, 416)
@@ -116,8 +115,7 @@ offset_right = 686.0
 offset_bottom = -300.0
 text = "0 m"
 horizontal_alignment = 1
-script = ExtResource("4_obynt")
-Score = ExtResource("5_jbi7k")
+script = ExtResource("3_j5anb")
 
 [node name="Glitched" type="RichTextLabel" parent="Platform"]
 z_index = -1

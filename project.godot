@@ -15,6 +15,10 @@ run/main_scene="res://Scenes/Game.tscn"
 config/features=PackedStringArray("4.4", "C#", "GL Compatibility")
 config/icon="res://Art/icon.png"
 
+[autoload]
+
+ScoreSourceOfTruth="*res://Assets/Score/score_source_of_truth.gd"
+
 [display]
 
 window/size/viewport_width=512
