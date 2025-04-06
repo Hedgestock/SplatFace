@@ -5,8 +5,10 @@
 - [x] Make levels despawn on fall
 - [x] Fix the bad level loading when previous is not triggered
 - [x] Fix jumpsquatting off a ledge locking the walk state
-- [ ] Save score
+- [x] Add internationalisation
 - [x] Fix the splatting on slants
+- [ ] Save score
 - [ ] Add touchscreen support
 - [ ] Add controller support
-- [ ] Add internationalisation
+- [ ] Add web export
+- [ ] Fix sitting animation?
