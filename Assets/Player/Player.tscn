@@ -1,17 +1,17 @@
 [gd_scene load_steps=23 format=3 uid="uid://cdb8ascv60w6m"]
 
 [ext_resource type="SpriteFrames" uid="uid://cek45u8lpr1um" path="res://Assets/Player/PlayerAnimation.tres" id="1_0m1k7"]
-[ext_resource type="PhysicsMaterial" uid="uid://bwit6m5lwgh5d" path="res://Assets/Player/PlayerRagdollPhysics.tres" id="1_2gtoc"]
-[ext_resource type="Script" uid="uid://cslr6gu7b2cu" path="res://Assets/Player/Player.cs" id="1_6hho7"]
 [ext_resource type="PhysicsMaterial" uid="uid://c58a8xbvj0w0y" path="res://Assets/Player/PlayerControlledPhysics.tres" id="1_f8gyt"]
+[ext_resource type="Script" uid="uid://b0g46a2is6dak" path="res://Assets/Player/player.gd" id="2_3brq0"]
+[ext_resource type="PhysicsMaterial" uid="uid://bwit6m5lwgh5d" path="res://Assets/Player/PlayerRagdollPhysics.tres" id="3_x4ggo"]
+[ext_resource type="PhysicsMaterial" uid="uid://obvt3x7jsug7" path="res://Assets/Player/PlayerLandingPhysics.tres" id="4_o1dpk"]
 [ext_resource type="FontFile" uid="uid://jvioeod3wvrd" path="res://Fonts/GravityRegular5.ttf" id="5_562yd"]
-[ext_resource type="PhysicsMaterial" uid="uid://obvt3x7jsug7" path="res://Assets/Player/PlayerLandingPhysics.tres" id="5_ab664"]
 [ext_resource type="AudioStream" uid="uid://bi0slg1spn3ao" path="res://Sounds/running-1-6846.mp3" id="7_ift0q"]
 [ext_resource type="Script" uid="uid://r4rxse5uhqi5" path="res://Assets/Player/player_sfx.gd" id="8_vewtk"]
 [ext_resource type="AudioStream" uid="uid://cpc2yv38m4la3" path="res://Sounds/Splat.mp3" id="9_xt07s"]
 [ext_resource type="AudioStream" uid="uid://dbtotl0xhrli" path="res://Sounds/land.mp3" id="10_is2w7"]
 [ext_resource type="AudioStream" uid="uid://iwllrm36ep6b" path="res://Sounds/dr willy full.wav" id="11_d4vsm"]
-[ext_resource type="Script" uid="uid://dljfp761c1xkn" path="res://Scenes/DebugWindow.cs" id="12_xmbd5"]
+[ext_resource type="Script" uid="uid://t58i28ffm5ms" path="res://Assets/Player/debug_window.gd" id="12_x4ggo"]
 
 [sub_resource type="Animation" id="Animation_pev06"]
 resource_name = "fall"
@@ -91,7 +91,7 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1),
 "values": [{
 "args": [],
-"method": &"Jump"
+"method": &"jump"
 }]
 }
 tracks/1/type = "method"
@@ -137,7 +137,7 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1),
 "values": [{
 "args": [],
-"method": &"Idle"
+"method": &"idle"
 }]
 }
 tracks/1/type = "method"
@@ -236,7 +236,7 @@ tracks/1/keys = {
 "transitions": PackedFloat32Array(1),
 "values": [{
 "args": [],
-"method": &"ToggleMusic"
+"method": &"toggle_music"
 }]
 }
 tracks/2/type = "method"
@@ -269,7 +269,7 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1),
 "values": [{
 "args": [],
-"method": &"Idle"
+"method": &"idle"
 }]
 }
 tracks/1/type = "method"
@@ -349,21 +349,21 @@ _data = {
 radius = 4.0
 height = 16.0
 
-[node name="Player" type="RigidBody2D" node_paths=PackedStringArray("DistanceFallenLabel", "Music", "Sprite", "Animation", "GroundRayCast", "DebugLabel", "DebugWindow")]
+[node name="Player" type="RigidBody2D" node_paths=PackedStringArray("distance_fallen_label", "music", "sprite", "animation", "ground_ray", "debug_label", "debug_window")]
 physics_material_override = ExtResource("1_f8gyt")
 lock_rotation = true
 continuous_cd = 1
-script = ExtResource("1_6hho7")
-DistanceFallenLabel = NodePath("DistanceFallen")
-Music = NodePath("Music")
-Sprite = NodePath("AnimatedSprite2D")
-Animation = NodePath("AnimationPlayer")
-GroundRayCast = NodePath("GroundCheck")
-ControlledPhysics = ExtResource("1_f8gyt")
-RagdollPhysics = ExtResource("1_2gtoc")
-LandingPhysics = ExtResource("5_ab664")
-DebugLabel = NodePath("Window/CanvasLayer/Debug")
-DebugWindow = NodePath("Window")
+script = ExtResource("2_3brq0")
+distance_fallen_label = NodePath("DistanceFallen")
+music = NodePath("Music")
+sprite = NodePath("AnimatedSprite2D")
+animation = NodePath("AnimationPlayer")
+ground_ray = NodePath("GroundCheck")
+controlled_physics = ExtResource("1_f8gyt")
+ragdoll_physics = ExtResource("3_x4ggo")
+landing_physics = ExtResource("4_o1dpk")
+debug_label = NodePath("Window/CanvasLayer/Debug")
+debug_window = NodePath("Window")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = ExtResource("1_0m1k7")
@@ -419,7 +419,7 @@ autoplay = true
 position = Vector2i(0, 36)
 size = Vector2i(400, 1000)
 visible = false
-script = ExtResource("12_xmbd5")
+script = ExtResource("12_x4ggo")
 
 [node name="Camera2D" type="Camera2D" parent="Window"]
 position = Vector2(523, -1740)

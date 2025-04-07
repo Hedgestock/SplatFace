@@ -1,7 +1,7 @@
 [gd_scene load_steps=36 format=3 uid="uid://4vdsghonlo2d"]
 
+[ext_resource type="Script" uid="uid://bldqq06jjlyft" path="res://Scenes/game.gd" id="1_71axn"]
 [ext_resource type="TileSet" uid="uid://bkawqph4bvxg0" path="res://Assets/TileSets/BackgroundTileSet.tres" id="1_guc81"]
-[ext_resource type="Script" uid="uid://bkfwui4mca55y" path="res://Scenes/Game.cs" id="1_x6a0h"]
 [ext_resource type="TileSet" uid="uid://cym1xc2552p54" path="res://Assets/TileSets/MainTileSet.tres" id="2_pg232"]
 [ext_resource type="Texture2D" uid="uid://bpmiutj25u0bp" path="res://Art/Background/Mid Fog.png" id="3_64klu"]
 [ext_resource type="PackedScene" uid="uid://1g1143hfmdln" path="res://Scenes/Levels/ResidentialLevel.tscn" id="3_fswu5"]
@@ -80,11 +80,10 @@ default_font_size = 18
 Label/colors/font_color = Color(0.564706, 0.564706, 0.639216, 1)
 RichTextLabel/fonts/bold_font = SubResource("FontVariation_alh3a")
 
-[node name="Game" type="Node" node_paths=PackedStringArray("LevelsContainer", "Player")]
-script = ExtResource("1_x6a0h")
-Levels = Array[PackedScene]([ExtResource("10_k8esl"), ExtResource("3_fswu5"), ExtResource("4_0fje5"), ExtResource("5_ar2eq")])
-LevelsContainer = NodePath("Levels")
-Player = NodePath("Player")
+[node name="Game" type="Node" node_paths=PackedStringArray("levels_container")]
+script = ExtResource("1_71axn")
+levels = Array[PackedScene]([ExtResource("4_0fje5"), ExtResource("10_k8esl"), ExtResource("5_ar2eq"), ExtResource("3_fswu5")])
+levels_container = NodePath("Levels")
 
 [node name="ParallaxBackground" type="ParallaxBackground" parent="."]
 
@@ -668,7 +667,7 @@ text = "Safall"
 [node name="Levels" type="Node" parent="."]
 
 [node name="Player" parent="." instance=ExtResource("3_w2er8")]
-position = Vector2(202, -1036)
+position = Vector2(96, -31)
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 

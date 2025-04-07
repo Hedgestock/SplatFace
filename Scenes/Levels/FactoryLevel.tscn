@@ -1,6 +1,6 @@
 [gd_scene load_steps=20 format=3 uid="uid://beduf0w71x15y"]
 
-[ext_resource type="Script" uid="uid://ciojktndbb8r5" path="res://Scenes/Levels/Level.cs" id="1_cq16p"]
+[ext_resource type="Script" uid="uid://bdwfiejcroqi7" path="res://Scenes/Levels/level.gd" id="1_nrc24"]
 [ext_resource type="TileSet" uid="uid://cym1xc2552p54" path="res://Assets/TileSets/MainTileSet.tres" id="2_dd8fp"]
 [ext_resource type="Script" uid="uid://md68mpkvkcyr" path="res://Scenes/score_label.gd" id="3_nrc24"]
 
@@ -52,9 +52,9 @@ size = Vector2(64, 4)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_prvwb"]
 size = Vector2(96, 4)
 
-[node name="FactoryLevel" type="Node2D" node_paths=PackedStringArray("TriggerArea")]
-script = ExtResource("1_cq16p")
-TriggerArea = NodePath("Area2D")
+[node name="FactoryLevel" type="Node2D" node_paths=PackedStringArray("trigger_area")]
+script = ExtResource("1_nrc24")
+trigger_area = NodePath("Area2D")
 
 [node name="Area2D" type="Area2D" parent="."]
 visible = false

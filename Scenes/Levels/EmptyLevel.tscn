@@ -1,6 +1,6 @@
 [gd_scene load_steps=16 format=3 uid="uid://bcsxccslbicjl"]
 
-[ext_resource type="Script" uid="uid://ciojktndbb8r5" path="res://Scenes/Levels/Level.cs" id="1_thiqi"]
+[ext_resource type="Script" uid="uid://bdwfiejcroqi7" path="res://Scenes/Levels/level.gd" id="1_8x0y0"]
 [ext_resource type="TileSet" uid="uid://cym1xc2552p54" path="res://Assets/TileSets/MainTileSet.tres" id="2_5sgjm"]
 [ext_resource type="Script" uid="uid://md68mpkvkcyr" path="res://Scenes/score_label.gd" id="3_8x0y0"]
 [ext_resource type="FontFile" uid="uid://jvioeod3wvrd" path="res://Fonts/GravityRegular5.ttf" id="6_8syaf"]
@@ -38,9 +38,9 @@ size = Vector2(128, 4)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_7773i"]
 size = Vector2(64, 4)
 
-[node name="EmptyLevel" type="Node2D" node_paths=PackedStringArray("TriggerArea")]
-script = ExtResource("1_thiqi")
-TriggerArea = NodePath("Area2D")
+[node name="EmptyLevel" type="Node2D" node_paths=PackedStringArray("trigger_area")]
+script = ExtResource("1_8x0y0")
+trigger_area = NodePath("Area2D")
 
 [node name="Area2D" type="Area2D" parent="."]
 

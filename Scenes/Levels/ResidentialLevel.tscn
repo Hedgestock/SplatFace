@@ -1,6 +1,6 @@
 [gd_scene load_steps=14 format=3 uid="uid://1g1143hfmdln"]
 
-[ext_resource type="Script" uid="uid://ciojktndbb8r5" path="res://Scenes/Levels/Level.cs" id="1_rj4ns"]
+[ext_resource type="Script" uid="uid://bdwfiejcroqi7" path="res://Scenes/Levels/level.gd" id="1_j5anb"]
 [ext_resource type="TileSet" uid="uid://cym1xc2552p54" path="res://Assets/TileSets/MainTileSet.tres" id="2_boeex"]
 [ext_resource type="Script" uid="uid://md68mpkvkcyr" path="res://Scenes/score_label.gd" id="3_j5anb"]
 
@@ -34,9 +34,9 @@ size = Vector2(256, 48)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ck58y"]
 size = Vector2(256, 48)
 
-[node name="ResidentialLevel" type="Node2D" node_paths=PackedStringArray("TriggerArea")]
-script = ExtResource("1_rj4ns")
-TriggerArea = NodePath("Area2D")
+[node name="ResidentialLevel" type="Node2D" node_paths=PackedStringArray("trigger_area")]
+script = ExtResource("1_j5anb")
+trigger_area = NodePath("Area2D")
 
 [node name="Area2D" type="Area2D" parent="."]
 
