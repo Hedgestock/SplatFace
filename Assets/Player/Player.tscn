@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=3 uid="uid://cdb8ascv60w6m"]
+[gd_scene load_steps=22 format=3 uid="uid://cdb8ascv60w6m"]
 
 [ext_resource type="SpriteFrames" uid="uid://cek45u8lpr1um" path="res://Assets/Player/PlayerAnimation.tres" id="1_0m1k7"]
 [ext_resource type="PhysicsMaterial" uid="uid://c58a8xbvj0w0y" path="res://Assets/Player/PlayerControlledPhysics.tres" id="1_f8gyt"]
@@ -10,7 +10,6 @@
 [ext_resource type="Script" uid="uid://r4rxse5uhqi5" path="res://Assets/Player/player_sfx.gd" id="8_vewtk"]
 [ext_resource type="AudioStream" uid="uid://cpc2yv38m4la3" path="res://Sounds/Splat.mp3" id="9_xt07s"]
 [ext_resource type="AudioStream" uid="uid://dbtotl0xhrli" path="res://Sounds/land.mp3" id="10_is2w7"]
-[ext_resource type="AudioStream" uid="uid://iwllrm36ep6b" path="res://Sounds/dr willy full.wav" id="11_d4vsm"]
 [ext_resource type="Script" uid="uid://t58i28ffm5ms" path="res://Assets/Player/debug_window.gd" id="12_x4ggo"]
 
 [sub_resource type="Animation" id="Animation_pev06"]
@@ -355,7 +354,7 @@ lock_rotation = true
 continuous_cd = 1
 script = ExtResource("2_3brq0")
 distance_fallen_label = NodePath("DistanceFallen")
-music = NodePath("Music")
+music = NodePath("")
 sprite = NodePath("AnimatedSprite2D")
 animation = NodePath("AnimationPlayer")
 ground_ray = NodePath("GroundCheck")
@@ -410,10 +409,6 @@ script = ExtResource("8_vewtk")
 running = ExtResource("7_ift0q")
 splatting = ExtResource("9_xt07s")
 landing = ExtResource("10_is2w7")
-
-[node name="Music" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("11_d4vsm")
-autoplay = true
 
 [node name="Window" type="Window" parent="."]
 position = Vector2i(0, 36)

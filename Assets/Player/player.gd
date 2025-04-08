@@ -58,7 +58,7 @@ func _physics_process(delta):
 		var direction = Input.get_axis("move_left", "move_right")
 		if (is_walking):
 			direction = clamp(direction, -0.49, 0.49)
-		linear_velocity = Vector2(direction * speed, linear_velocity.y if ground_ray.get_collision_normal() != Vector2.UP else 0)
+		linear_velocity = Vector2(direction * speed, linear_velocity.y if ground_ray.get_collision_normal() != Vector2.UP else 0.0)
 		if (animation.assigned_animation != "jump"):
 			if (direction == 0):
 				animation.play("idle")

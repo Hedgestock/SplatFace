@@ -1,4 +1,4 @@
-[gd_scene load_steps=36 format=3 uid="uid://4vdsghonlo2d"]
+[gd_scene load_steps=42 format=3 uid="uid://4vdsghonlo2d"]
 
 [ext_resource type="Script" uid="uid://bldqq06jjlyft" path="res://Scenes/game.gd" id="1_71axn"]
 [ext_resource type="TileSet" uid="uid://bkawqph4bvxg0" path="res://Assets/TileSets/BackgroundTileSet.tres" id="1_guc81"]
@@ -9,11 +9,15 @@
 [ext_resource type="PackedScene" uid="uid://cdb8ascv60w6m" path="res://Assets/Player/Player.tscn" id="3_w2er8"]
 [ext_resource type="PackedScene" uid="uid://bcsxccslbicjl" path="res://Scenes/Levels/EmptyLevel.tscn" id="4_0fje5"]
 [ext_resource type="PackedScene" uid="uid://beduf0w71x15y" path="res://Scenes/Levels/FactoryLevel.tscn" id="5_ar2eq"]
+[ext_resource type="AudioStream" uid="uid://iwllrm36ep6b" path="res://Sounds/dr willy full.wav" id="6_x3xnh"]
 [ext_resource type="FontFile" uid="uid://jvioeod3wvrd" path="res://Fonts/GravityRegular5.ttf" id="9_fuppl"]
 [ext_resource type="FontVariation" uid="uid://cn7bs3lvotdog" path="res://Fonts/BillboardFont.tres" id="10_acvyw"]
 [ext_resource type="Script" uid="uid://md68mpkvkcyr" path="res://Scenes/score_label.gd" id="10_alh3a"]
 [ext_resource type="PackedScene" uid="uid://c1n02j7a0qt7y" path="res://Scenes/Levels/TrashyLevel.tscn" id="10_k8esl"]
 [ext_resource type="FontFile" uid="uid://ur6apffbvx6v" path="res://Fonts/GravityBold8.ttf" id="12_acvyw"]
+[ext_resource type="Script" uid="uid://p8sdn1g72lwq" path="res://Scenes/splash_screen.gd" id="15_4q8tf"]
+[ext_resource type="Texture2D" uid="uid://bkwhancs5j6o5" path="res://WaffleStock/Logo_anime_last_frame.png" id="15_alh3a"]
+[ext_resource type="VideoStream" uid="uid://desns6vcfplb0" path="res://WaffleStock/wafflestock animé.ogv" id="16_4q8tf"]
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_h4eep"]
 
@@ -80,10 +84,19 @@ default_font_size = 18
 Label/colors/font_color = Color(0.564706, 0.564706, 0.639216, 1)
 RichTextLabel/fonts/bold_font = SubResource("FontVariation_alh3a")
 
+[sub_resource type="InputEventAction" id="InputEventAction_x3xnh"]
+action = &"jump"
+
+[sub_resource type="Shortcut" id="Shortcut_8r6kd"]
+events = [SubResource("InputEventAction_x3xnh")]
+
 [node name="Game" type="Node" node_paths=PackedStringArray("levels_container")]
 script = ExtResource("1_71axn")
 levels = Array[PackedScene]([ExtResource("4_0fje5"), ExtResource("10_k8esl"), ExtResource("5_ar2eq"), ExtResource("3_fswu5")])
 levels_container = NodePath("Levels")
+
+[node name="Music" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("6_x3xnh")
 
 [node name="ParallaxBackground" type="ParallaxBackground" parent="."]
 
@@ -666,8 +679,9 @@ text = "Safall"
 
 [node name="Levels" type="Node" parent="."]
 
-[node name="Player" parent="." instance=ExtResource("3_w2er8")]
+[node name="Player" parent="." node_paths=PackedStringArray("music") instance=ExtResource("3_w2er8")]
 position = Vector2(96, -31)
+music = NodePath("../Music")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
@@ -704,11 +718,65 @@ alignment = 1
 
 [node name="Button" type="Button" parent="CanvasLayer/MarginContainer/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer"]
 layout_mode = 2
+mouse_default_cursor_shape = 2
+shortcut = SubResource("Shortcut_8r6kd")
 text = "understand.risks"
 
 [node name="Button2" type="Button" parent="CanvasLayer/MarginContainer/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer"]
 layout_mode = 2
+mouse_default_cursor_shape = 2
+shortcut = SubResource("Shortcut_8r6kd")
 text = "risks.understand"
+
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer" node_paths=PackedStringArray("waffle_stock", "logo", "last_frame", "music")]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.0980392, 0.27451, 0.407843, 1)
+script = ExtResource("15_4q8tf")
+waffle_stock = NodePath("WaffleStock")
+logo = NodePath("AspectRatioContainer/Logo")
+last_frame = NodePath("AspectRatioContainer/LastFrame")
+music = NodePath("../../Music")
+
+[node name="AspectRatioContainer" type="AspectRatioContainer" parent="CanvasLayer/ColorRect"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+ratio = 0.5625
+stretch_mode = 1
+
+[node name="LastFrame" type="TextureRect" parent="CanvasLayer/ColorRect/AspectRatioContainer"]
+layout_mode = 2
+texture = ExtResource("15_alh3a")
+expand_mode = 4
+
+[node name="Logo" type="VideoStreamPlayer" parent="CanvasLayer/ColorRect/AspectRatioContainer"]
+layout_mode = 2
+stream = ExtResource("16_4q8tf")
+expand = true
+
+[node name="WaffleStock" type="Label" parent="CanvasLayer/ColorRect"]
+modulate = Color(1, 1, 1, 0)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -79.0
+offset_top = 35.0
+offset_right = 79.0
+offset_bottom = 65.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 38
+text = "	WaffleStock"
 
 [connection signal="pressed" from="CanvasLayer/MarginContainer/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/Button" to="CanvasLayer/MarginContainer" method="hide"]
 [connection signal="pressed" from="CanvasLayer/MarginContainer/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/Button2" to="CanvasLayer/MarginContainer" method="hide"]
