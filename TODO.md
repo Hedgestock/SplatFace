@@ -7,8 +7,8 @@
 - [x] Fix jumpsquatting off a ledge locking the walk state
 - [x] Add internationalisation
 - [x] Fix the splatting on slants
-- [ ] Save score
+- [x] Fix sitting animation?
+- [x] Add controller support
+- [x] Add web export
 - [ ] Add touchscreen support
-- [ ] Add controller support
-- [ ] Add web export
-- [ ] Fix sitting animation?
+- [ ] Save score

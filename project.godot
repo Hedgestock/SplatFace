@@ -12,7 +12,7 @@ config_version=5
 
 config/name="SplatFace"
 config/version="2025.04.08.0"
-run/main_scene="res://Scenes/Game.tscn"
+run/main_scene="res://Game/Scenes/Game.tscn"
 config/features=PackedStringArray("4.4", "GL Compatibility")
 run/max_fps=60
 boot_splash/bg_color=Color(0.0980392, 0.27451, 0.407843, 1)
@@ -21,7 +21,7 @@ config/icon="uid://dn8ftg1ieunfc"
 
 [autoload]
 
-ScoreSourceOfTruth="*res://Assets/Score/score_source_of_truth.gd"
+ScoreSourceOfTruth="*res://Game/Assets/Score/score_source_of_truth.gd"
 
 [display]
 
@@ -103,7 +103,7 @@ pointing/emulate_touch_from_mouse=true
 
 [internationalization]
 
-locale/translations=PackedStringArray("res://Translations/Translations.en.translation", "res://Translations/Translations.fr.translation")
+locale/translations=PackedStringArray("res://Game/Translations/Translations.en.translation", "res://Game/Translations/Translations.fr.translation")
 
 [rendering]
 
