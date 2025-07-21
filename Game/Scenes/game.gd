@@ -6,6 +6,7 @@ class_name Game
 @export var levels_container: Node
 
 func _ready():
+	ScoreSourceOfTruth.emit_signal("score_changed")
 	add_level()
 
 var current_level_number: int = 0

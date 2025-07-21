@@ -11,4 +11,4 @@
 - [x] Add controller support
 - [x] Add web export
 - [ ] Add touchscreen support
-- [ ] Save score
+- [x] Save score
