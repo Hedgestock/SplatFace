@@ -10,5 +10,5 @@
 - [x] Fix sitting animation?
 - [x] Add controller support
 - [x] Add web export
-- [ ] Add touchscreen support
+- [x] Add touchscreen support
 - [x] Save score
