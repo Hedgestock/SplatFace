@@ -1,4 +1,4 @@
-[gd_resource type="Theme" load_steps=7 format=3 uid="uid://b7ixdh8fqowrp"]
+[gd_resource type="Theme" format=3 uid="uid://b7ixdh8fqowrp"]
 
 [ext_resource type="FontFile" uid="uid://ur6apffbvx6v" path="res://Game/Themes/Fonts/GravityBold8.ttf" id="1_djnte"]
 [ext_resource type="FontFile" uid="uid://jvioeod3wvrd" path="res://Game/Themes/Fonts/GravityRegular5.ttf" id="2_3e24n"]

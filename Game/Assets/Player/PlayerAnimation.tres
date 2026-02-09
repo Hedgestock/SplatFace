@@ -1,4 +1,4 @@
-[gd_resource type="SpriteFrames" load_steps=26 format=3 uid="uid://cek45u8lpr1um"]
+[gd_resource type="SpriteFrames" format=3 uid="uid://cek45u8lpr1um"]
 
 [ext_resource type="Texture2D" uid="uid://cglk8nlqo1f3b" path="res://Game/Art/AnimationSheet.png" id="1_hhw7j"]
 
