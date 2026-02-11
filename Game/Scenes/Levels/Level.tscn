@@ -1,0 +1,35 @@
+[gd_scene format=3 uid="uid://dq0qkh0e8mle6"]
+
+[ext_resource type="Script" uid="uid://bdwfiejcroqi7" path="res://Game/Scenes/Levels/level.gd" id="1_ofgal"]
+[ext_resource type="TileSet" uid="uid://cym1xc2552p54" path="res://Game/Assets/TileSets/MainTileSet.tres" id="2_7cfje"]
+
+[node name="Level" type="Node2D" unique_id=427569237 node_paths=PackedStringArray("load_trigger", "unload_trigger")]
+script = ExtResource("1_ofgal")
+load_trigger = NodePath("LoadTrigger")
+unload_trigger = NodePath("UnloadTrigger")
+
+[node name="LoadTrigger" type="VisibleOnScreenNotifier2D" parent="." unique_id=1897519951]
+position = Vector2(512, -512)
+scale = Vector2(50, 1)
+
+[node name="UnloadTrigger" type="VisibleOnScreenNotifier2D" parent="." unique_id=372297602]
+position = Vector2(512, 0)
+scale = Vector2(50, 1)
+
+[node name="Platform" type="TileMap" parent="." unique_id=1599940337]
+tile_set = ExtResource("2_7cfje")
+format = 2
+layer_0/name = "Background"
+layer_0/z_index = -3
+layer_1/name = "BackgroundOverlay"
+layer_1/z_index = -2
+layer_2/name = "Props"
+layer_2/z_index = -1
+layer_3/name = "Platforms"
+layer_4/name = "Foreground"
+layer_4/z_index = 1
+
+[node name="Ground" type="StaticBody2D" parent="Platform" unique_id=349026338]
+
+[connection signal="screen_entered" from="LoadTrigger" to="." method="_on_load_trigger_screen_entered"]
+[connection signal="screen_exited" from="UnloadTrigger" to="." method="_on_unload_trigger_screen_exited"]

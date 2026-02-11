@@ -1,16 +1,16 @@
 [gd_scene format=3 uid="uid://4vdsghonlo2d"]
 
-[ext_resource type="Script" uid="uid://bldqq06jjlyft" path="res://Game/Scenes/game.gd" id="1_71axn"]
 [ext_resource type="TileSet" uid="uid://bkawqph4bvxg0" path="res://Game/Assets/TileSets/BackgroundTileSet.tres" id="1_guc81"]
 [ext_resource type="TileSet" uid="uid://cym1xc2552p54" path="res://Game/Assets/TileSets/MainTileSet.tres" id="2_pg232"]
 [ext_resource type="Texture2D" uid="uid://bpmiutj25u0bp" path="res://Game/Art/Background/Mid Fog.png" id="3_64klu"]
-[ext_resource type="PackedScene" uid="uid://1g1143hfmdln" path="res://Game/Scenes/Levels/ResidentialLevel.tscn" id="3_fswu5"]
+[ext_resource type="PackedScene" uid="uid://cbsxt666sm824" path="res://Game/Scenes/Levels/ResidentialLevel.tscn" id="3_fswu5"]
 [ext_resource type="Texture2D" uid="uid://bcda4hjb3c7v4" path="res://Game/Art/Background/Frontal Fog.png" id="3_krrpx"]
 [ext_resource type="PackedScene" uid="uid://cdb8ascv60w6m" path="res://Game/Assets/Player/Player.tscn" id="3_w2er8"]
 [ext_resource type="PackedScene" uid="uid://bcsxccslbicjl" path="res://Game/Scenes/Levels/EmptyLevel.tscn" id="4_0fje5"]
 [ext_resource type="PackedScene" uid="uid://beduf0w71x15y" path="res://Game/Scenes/Levels/FactoryLevel.tscn" id="5_ar2eq"]
 [ext_resource type="AudioStream" uid="uid://iwllrm36ep6b" path="res://Game/Audio/dr willy full.wav" id="6_x3xnh"]
 [ext_resource type="FontFile" uid="uid://jvioeod3wvrd" path="res://Game/Themes/Fonts/GravityRegular5.ttf" id="9_fuppl"]
+[ext_resource type="Script" uid="uid://bldqq06jjlyft" path="res://Game/Scenes/levels_container.gd" id="10_88nt1"]
 [ext_resource type="FontVariation" uid="uid://cn7bs3lvotdog" path="res://Game/Themes/Fonts/BillboardFont.tres" id="10_acvyw"]
 [ext_resource type="Script" uid="uid://md68mpkvkcyr" path="res://Game/Scenes/score_label.gd" id="10_alh3a"]
 [ext_resource type="PackedScene" uid="uid://c1n02j7a0qt7y" path="res://Game/Scenes/Levels/TrashyLevel.tscn" id="10_k8esl"]
@@ -87,19 +87,16 @@ default_font_size = 18
 Label/colors/font_color = Color(0.564706, 0.564706, 0.639216, 1)
 RichTextLabel/fonts/bold_font = SubResource("FontVariation_alh3a")
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_sulgr"]
+size = Vector2(50, 20)
+
 [sub_resource type="InputEventAction" id="InputEventAction_x3xnh"]
 action = &"jump"
 
 [sub_resource type="Shortcut" id="Shortcut_8r6kd"]
 events = [SubResource("InputEventAction_x3xnh")]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_sulgr"]
-size = Vector2(50, 20)
-
-[node name="Game" type="Node" unique_id=1363705718 node_paths=PackedStringArray("levels_container")]
-script = ExtResource("1_71axn")
-levels = Array[PackedScene]([ExtResource("4_0fje5"), ExtResource("10_k8esl"), ExtResource("5_ar2eq"), ExtResource("3_fswu5")])
-levels_container = NodePath("Levels")
+[node name="Game" type="Node" unique_id=1363705718]
 
 [node name="Music" type="AudioStreamPlayer" parent="." unique_id=2147124956]
 stream = ExtResource("6_x3xnh")
@@ -683,13 +680,101 @@ theme_override_fonts/font = ExtResource("9_fuppl")
 theme_override_font_sizes/font_size = 5
 text = "Safall"
 
-[node name="Levels" type="Node" parent="." unique_id=210294499]
+[node name="Levels" type="Node" parent="." unique_id=210294499 node_paths=PackedStringArray("player")]
+script = ExtResource("10_88nt1")
+levels = Array[PackedScene]([ExtResource("4_0fje5"), ExtResource("10_k8esl"), ExtResource("5_ar2eq"), ExtResource("3_fswu5")])
+player = NodePath("../Player")
 
 [node name="Player" parent="." unique_id=1186152248 node_paths=PackedStringArray("music") instance=ExtResource("3_w2er8")]
 position = Vector2(96, -31)
 music = NodePath("../Music")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1690158503]
+
+[node name="Node" type="Node2D" parent="CanvasLayer" unique_id=1854507834]
+modulate = Color(1, 1, 1, 0.39215687)
+position = Vector2(0, 512)
+script = ExtResource("19_rkkfu")
+
+[node name="Left" type="TouchScreenButton" parent="CanvasLayer/Node" unique_id=412529062]
+position = Vector2(214, -54)
+scale = Vector2(3, 3)
+texture_normal = ExtResource("20_jcuve")
+texture_pressed = ExtResource("21_mu73b")
+shape = SubResource("RectangleShape2D_sulgr")
+passby_press = true
+action = "move_left"
+
+[node name="Label" type="Label" parent="CanvasLayer/Node/Left" unique_id=60120139]
+offset_right = 48.0
+offset_bottom = 15.0
+text = "<Left"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Right" type="TouchScreenButton" parent="CanvasLayer/Node" unique_id=1649110591]
+position = Vector2(365, -54)
+scale = Vector2(3, 3)
+texture_normal = ExtResource("20_jcuve")
+texture_pressed = ExtResource("21_mu73b")
+shape = SubResource("RectangleShape2D_sulgr")
+passby_press = true
+action = "move_right"
+
+[node name="Label" type="Label" parent="CanvasLayer/Node/Right" unique_id=1367664821]
+offset_right = 48.0
+offset_bottom = 15.0
+text = "Right>"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Jump" type="TouchScreenButton" parent="CanvasLayer/Node" unique_id=2067081103]
+position = Vector2(3, -174)
+scale = Vector2(3, 3)
+texture_normal = ExtResource("20_jcuve")
+texture_pressed = ExtResource("21_mu73b")
+shape = SubResource("RectangleShape2D_sulgr")
+passby_press = true
+action = "jump"
+
+[node name="Label" type="Label" parent="CanvasLayer/Node/Jump" unique_id=1644623418]
+offset_right = 48.0
+offset_bottom = 15.0
+text = "Jump"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Walk" type="TouchScreenButton" parent="CanvasLayer/Node" unique_id=1893535915]
+position = Vector2(3, -113.99997)
+scale = Vector2(3, 3)
+texture_normal = ExtResource("20_jcuve")
+texture_pressed = ExtResource("21_mu73b")
+shape = SubResource("RectangleShape2D_sulgr")
+passby_press = true
+action = "walk"
+
+[node name="Label" type="Label" parent="CanvasLayer/Node/Walk" unique_id=749146961]
+offset_right = 48.0
+offset_bottom = 15.0
+text = "Walk"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Sit" type="TouchScreenButton" parent="CanvasLayer/Node" unique_id=315376733]
+position = Vector2(3, -54)
+scale = Vector2(3, 3)
+texture_normal = ExtResource("20_jcuve")
+texture_pressed = ExtResource("21_mu73b")
+shape = SubResource("RectangleShape2D_sulgr")
+passby_press = true
+action = "sit"
+
+[node name="Label" type="Label" parent="CanvasLayer/Node/Sit" unique_id=2071134451]
+offset_right = 48.0
+offset_bottom = 15.0
+text = "Sit"
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="MarginContainer" type="MarginContainer" parent="CanvasLayer" unique_id=1691988746]
 anchors_preset = 15
@@ -735,6 +820,7 @@ shortcut = SubResource("Shortcut_8r6kd")
 text = "risks.understand"
 
 [node name="ColorRect" type="ColorRect" parent="CanvasLayer" unique_id=894018477 node_paths=PackedStringArray("waffle_stock", "logo", "last_frame", "music")]
+visible = false
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -783,89 +869,6 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_font_sizes/font_size = 38
 text = "	WaffleStock"
-
-[node name="Node" type="Node2D" parent="CanvasLayer" unique_id=1854507834]
-script = ExtResource("19_rkkfu")
-
-[node name="Left" type="TouchScreenButton" parent="CanvasLayer/Node" unique_id=412529062]
-position = Vector2(314, 476)
-scale = Vector2(2, 2)
-texture_normal = ExtResource("20_jcuve")
-texture_pressed = ExtResource("21_mu73b")
-shape = SubResource("RectangleShape2D_sulgr")
-passby_press = true
-action = "move_left"
-
-[node name="Label" type="Label" parent="CanvasLayer/Node/Left" unique_id=60120139]
-offset_right = 48.0
-offset_bottom = 15.0
-text = "<Left"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="Right" type="TouchScreenButton" parent="CanvasLayer/Node" unique_id=1649110591]
-position = Vector2(414, 476)
-scale = Vector2(2, 2)
-texture_normal = ExtResource("20_jcuve")
-texture_pressed = ExtResource("21_mu73b")
-shape = SubResource("RectangleShape2D_sulgr")
-passby_press = true
-action = "move_right"
-
-[node name="Label" type="Label" parent="CanvasLayer/Node/Right" unique_id=1367664821]
-offset_right = 48.0
-offset_bottom = 15.0
-text = "Right>"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="Jump" type="TouchScreenButton" parent="CanvasLayer/Node" unique_id=2067081103]
-position = Vector2(2, 396)
-scale = Vector2(2, 2)
-texture_normal = ExtResource("20_jcuve")
-texture_pressed = ExtResource("21_mu73b")
-shape = SubResource("RectangleShape2D_sulgr")
-passby_press = true
-action = "jump"
-
-[node name="Label" type="Label" parent="CanvasLayer/Node/Jump" unique_id=1644623418]
-offset_right = 48.0
-offset_bottom = 15.0
-text = "Jump"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="Walk" type="TouchScreenButton" parent="CanvasLayer/Node" unique_id=1893535915]
-position = Vector2(2, 436)
-scale = Vector2(2, 2)
-texture_normal = ExtResource("20_jcuve")
-texture_pressed = ExtResource("21_mu73b")
-shape = SubResource("RectangleShape2D_sulgr")
-passby_press = true
-action = "walk"
-
-[node name="Label" type="Label" parent="CanvasLayer/Node/Walk" unique_id=749146961]
-offset_right = 48.0
-offset_bottom = 15.0
-text = "Walk"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="Sit" type="TouchScreenButton" parent="CanvasLayer/Node" unique_id=315376733]
-position = Vector2(2, 476)
-scale = Vector2(2, 2)
-texture_normal = ExtResource("20_jcuve")
-texture_pressed = ExtResource("21_mu73b")
-shape = SubResource("RectangleShape2D_sulgr")
-passby_press = true
-action = "sit"
-
-[node name="Label" type="Label" parent="CanvasLayer/Node/Sit" unique_id=2071134451]
-offset_right = 48.0
-offset_bottom = 15.0
-text = "Sit"
-horizontal_alignment = 1
-vertical_alignment = 1
 
 [connection signal="pressed" from="CanvasLayer/MarginContainer/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/Button" to="CanvasLayer/MarginContainer" method="hide"]
 [connection signal="pressed" from="CanvasLayer/MarginContainer/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/Button2" to="CanvasLayer/MarginContainer" method="hide"]

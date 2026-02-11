@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=3 uid="uid://cdb8ascv60w6m"]
+[gd_scene format=3 uid="uid://cdb8ascv60w6m"]
 
 [ext_resource type="SpriteFrames" uid="uid://cek45u8lpr1um" path="res://Game/Assets/Player/PlayerAnimation.tres" id="1_0m1k7"]
 [ext_resource type="PhysicsMaterial" uid="uid://c58a8xbvj0w0y" path="res://Game/Assets/Player/PlayerControlledPhysics.tres" id="1_f8gyt"]
@@ -348,13 +348,13 @@ _data = {
 radius = 4.0
 height = 16.0
 
-[node name="Player" type="RigidBody2D" node_paths=PackedStringArray("distance_fallen_label", "music", "sprite", "animation", "ground_ray", "debug_label", "debug_window")]
+[node name="Player" type="RigidBody2D" unique_id=1128783274 node_paths=PackedStringArray("distance_fallen_label", "sprite", "animation", "ground_ray", "debug_label", "debug_window")]
+position = Vector2(1, 0)
 physics_material_override = ExtResource("1_f8gyt")
 lock_rotation = true
 continuous_cd = 1
 script = ExtResource("2_3brq0")
 distance_fallen_label = NodePath("DistanceFallen")
-music = NodePath("")
 sprite = NodePath("AnimatedSprite2D")
 animation = NodePath("AnimationPlayer")
 ground_ray = NodePath("GroundCheck")
@@ -364,30 +364,28 @@ landing_physics = ExtResource("4_o1dpk")
 debug_label = NodePath("Window/CanvasLayer/Debug")
 debug_window = NodePath("Window")
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1187910869]
 sprite_frames = ExtResource("1_0m1k7")
 animation = &"sit"
 autoplay = "idle"
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-libraries = {
-&"": SubResource("AnimationLibrary_112fm")
-}
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=323292420]
+libraries/ = SubResource("AnimationLibrary_112fm")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=902423190]
 position = Vector2(0, 4)
 shape = SubResource("CapsuleShape2D_5p7l5")
 
-[node name="GroundCheck" type="RayCast2D" parent="."]
+[node name="GroundCheck" type="RayCast2D" parent="." unique_id=1615590731]
 position = Vector2(0, 11)
 target_position = Vector2(0, 5)
 
-[node name="Camera2D" type="Camera2D" parent="."]
+[node name="Camera2D" type="Camera2D" parent="." unique_id=1626635295]
 limit_left = 0
 limit_right = 1024
 limit_bottom = 0
 
-[node name="DistanceFallen" type="Label" parent="."]
+[node name="DistanceFallen" type="Label" parent="." unique_id=1708367896]
 z_index = 10
 z_as_relative = false
 anchors_preset = 5
@@ -403,26 +401,27 @@ theme_override_font_sizes/font_size = 5
 text = "0m"
 horizontal_alignment = 1
 
-[node name="PlayerSFX" type="AudioStreamPlayer2D" parent="."]
+[node name="PlayerSFX" type="AudioStreamPlayer2D" parent="." unique_id=950156088]
 autoplay = true
 script = ExtResource("8_vewtk")
 running = ExtResource("7_ift0q")
 splatting = ExtResource("9_xt07s")
 landing = ExtResource("10_is2w7")
 
-[node name="Window" type="Window" parent="."]
+[node name="Window" type="Window" parent="." unique_id=1276409027]
+oversampling_override = 1.0
 position = Vector2i(0, 36)
 size = Vector2i(400, 1000)
 visible = false
 script = ExtResource("12_x4ggo")
 
-[node name="Camera2D" type="Camera2D" parent="Window"]
+[node name="Camera2D" type="Camera2D" parent="Window" unique_id=327077595]
 position = Vector2(523, -1740)
 zoom = Vector2(0.4, 0.4)
 
-[node name="CanvasLayer" type="CanvasLayer" parent="Window"]
+[node name="CanvasLayer" type="CanvasLayer" parent="Window" unique_id=607524338]
 
-[node name="Debug" type="Label" parent="Window/CanvasLayer"]
+[node name="Debug" type="Label" parent="Window/CanvasLayer" unique_id=758534893]
 z_index = 10
 z_as_relative = false
 offset_right = 16.0

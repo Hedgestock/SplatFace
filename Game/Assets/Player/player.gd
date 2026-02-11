@@ -79,7 +79,8 @@ func _physics_process(delta):
 	debug_label.text = current_physics.resource_name + "\n" + animation.assigned_animation + " - " + sprite.animation + "\ngrounded: " + str(ground_ray.is_colliding()) + "\nactionable: " + str(is_actionable) + "\n" + str("%0.2f" % linear_velocity.y)
 
 func _input(event: InputEvent):
-	if (event.is_action_pressed("jump") && is_actionable):
+	if (event.is_action_pressed("jump")): #&& is_actionable):
+		linear_velocity += Vector2.UP * 600;
 		jump_squat()
 	elif (event.is_action("sit") && is_actionable):
 		sit()
