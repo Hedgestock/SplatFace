@@ -15,7 +15,7 @@ compatibility/default_parent_skeleton_in_mesh_instance_3d=true
 [application]
 
 config/name="SplatFace"
-config/version="2026.02.12.0"
+config/version="2026.02.15.0"
 run/main_scene="res://Game/Scenes/Game.tscn"
 config/use_custom_user_dir=true
 config/custom_user_dir_name="WaffleStock/SplatFace"
